@@ -1,31 +1,30 @@
 import { siteContent } from "@/data/site";
 import { Reveal } from "@/components/ui/Reveal";
+import { SectionLabel } from "@/components/ui/Editorial";
 
 export function Method() {
   const { method } = siteContent;
 
   return (
-    <section id="methode" className="px-6 py-32">
-      <div className="mx-auto max-w-6xl">
+    <section id="methode" className="section-pad section-y bg-trame-paper">
+      <div className="mx-auto max-w-[90rem]">
         <Reveal>
-          <h2 className="font-serif text-4xl font-semibold md:text-5xl">
-            {method.headline}
-          </h2>
-          <p className="mt-4 text-lg text-trame-muted">{method.subtitle}</p>
+          <SectionLabel>Méthode</SectionLabel>
+          <h2 className="display-title max-w-[14ch]">{method.headline}</h2>
+          <p className="mt-4 max-w-md text-trame-muted">{method.subtitle}</p>
         </Reveal>
 
-        <div className="mt-16 grid gap-6 md:grid-cols-2">
+        <div className="mt-20 grid gap-0 md:grid-cols-2 lg:grid-cols-4">
           {method.steps.map((step, i) => (
-            <Reveal key={step.id} delay={i * 0.1}>
-              <article className="group relative overflow-hidden rounded-2xl border border-trame-thread/20 bg-trame-surface p-8 transition-colors hover:border-trame-thread/50">
-                <span className="font-mono text-5xl font-light text-trame-thread/30">
-                  {step.number}
-                </span>
-                <h3 className="mt-4 font-serif text-2xl font-semibold">{step.title}</h3>
-                <p className="mt-3 leading-relaxed text-trame-muted">
+            <Reveal key={step.id} delay={i * 0.08}>
+              <article className="border-t border-trame-black/12 py-8 md:border-l md:border-t-0 md:pl-8 md:first:border-l-0 md:first:pl-0 lg:py-0">
+                <span className="editorial-num block">{step.number}</span>
+                <h3 className="font-display mt-6 text-xl text-trame-black">
+                  {step.title}
+                </h3>
+                <p className="mt-4 text-sm leading-relaxed text-trame-muted">
                   {step.description}
                 </p>
-                <div className="absolute -bottom-8 -right-8 h-32 w-32 rounded-full bg-trame-thread/5 transition-transform group-hover:scale-110" />
               </article>
             </Reveal>
           ))}

@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" fill="none">
+  <rect width="1200" height="630" fill="#131012"/>
+  <path d="M0 157.5H1200M0 315H1200M0 472.5H1200" stroke="#ECE7DD" stroke-opacity="0.08" stroke-width="1"/>
+  <path d="M300 0V630M600 0V630M900 0V630" stroke="#ECE7DD" stroke-opacity="0.08" stroke-width="1"/>
+  <circle cx="300" cy="157.5" r="10" fill="#2C2BE8"/>
+  <circle cx="600" cy="315" r="10" fill="#2C2BE8"/>
+  <circle cx="900" cy="472.5" r="10" fill="#2C2BE8"/>
+  <text x="80" y="340" font-family="Archivo Black, Archivo, Arial Black, sans-serif" font-size="96" font-weight="900" fill="#ECE7DD" letter-spacing="-0.03em">TRAME</text>
+  <text x="80" y="420" font-family="Space Grotesk, Arial, sans-serif" font-size="28" fill="#ECE7DD" fill-opacity="0.6" letter-spacing="0.05em">RÉVÉLER LA TRAME DU TRAVAIL</text>
+</svg>

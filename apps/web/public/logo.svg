@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 48" fill="none">
+  <path d="M0 12H48M0 24H48M0 36H48" stroke="#131012" stroke-opacity="0.15" stroke-width="0.75"/>
+  <path d="M12 0V48M24 0V48M36 0V48" stroke="#131012" stroke-opacity="0.15" stroke-width="0.75"/>
+  <circle cx="12" cy="12" r="2.75" fill="#2C2BE8"/>
+  <circle cx="24" cy="24" r="2.75" fill="#2C2BE8"/>
+  <circle cx="36" cy="36" r="2.75" fill="#2C2BE8"/>
+  <text x="60" y="34" font-family="Archivo Black, Archivo, Arial Black, sans-serif" font-size="28" font-weight="900" fill="#131012" letter-spacing="-0.02em">TRAME</text>
+</svg>

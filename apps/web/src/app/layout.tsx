@@ -1,29 +1,34 @@
 import type { Metadata } from "next";
-import { DM_Sans, Fraunces } from "next/font/google";
+import { Archivo, Space_Grotesk } from "next/font/google";
 import { SmoothScroll } from "@/components/providers/SmoothScroll";
 import "./globals.css";
 
-const dmSans = DM_Sans({
-  variable: "--font-dm-sans",
+const archivo = Archivo({
+  variable: "--font-archivo",
   subsets: ["latin"],
-  weight: ["400", "500", "600"],
+  weight: ["900"],
 });
 
-const fraunces = Fraunces({
-  variable: "--font-fraunces",
+const spaceGrotesk = Space_Grotesk({
+  variable: "--font-space-grotesk",
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
+  weight: ["400", "500"],
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : "http://localhost:3000"),
   title: "Trame — Révéler la trame du travail",
   description:
     "Cabinet de transformation des workflows cognitifs. Codesign, preuve rapide, transfert aux équipes.",
+  icons: {
+    icon: [{ url: "/logo-mark.svg", type: "image/svg+xml" }],
+  },
   openGraph: {
     title: "Trame",
     description: "Révéler la trame du travail. La reconcevoir avec l'IA.",
     type: "website",
     locale: "fr_FR",
+    images: [{ url: "/og-trame.svg", width: 1200, height: 630 }],
   },
 };
 
@@ -35,9 +40,9 @@ export default function RootLayout({
   return (
     <html
       lang="fr"
-      className={`${dmSans.variable} ${fraunces.variable} h-full antialiased`}
+      className={`${archivo.variable} ${spaceGrotesk.variable} h-full antialiased`}
     >
-      <body className="min-h-full bg-trame-paper text-trame-ink">
+      <body className="min-h-full bg-trame-paper text-trame-black">
         <SmoothScroll>{children}</SmoothScroll>
       </body>
     </html>

@@ -1,61 +1,79 @@
-# Identité Trame
+# Identité Trame — v1
+
+Identité visuelle alignée sur le deck pitch 2026. Registre **Fjord/Song** : poster éditorial, mono-couleur franche, asymétrie assumée.
 
 ## Nom
 
 **Trame** — la structure sous-jacente d'un tissu, d'un récit, d'un process.
 
-À valider : domaine .com, INPI/EUIPO, handles réseaux sociaux.
-
-> Éviter « Cairn » — collision francophone.
-
 ## Promesse
 
 > Révéler la trame du travail. La reconcevoir avec l'IA.
 
-## Tagline courte
+## Palette
 
-> Le cabinet qui révèle et reconçoit la trame du travail de la connaissance — preuve à l'appui.
+| Token | Hex | Usage |
+|-------|-----|-------|
+| **Noir chaud** | `#131012` | Texte, headers, fonds statement |
+| **Papier os** | `#ECE7DD` | Fond principal, respiration |
+| **Ultramarine électrique** | `#2C2BE8` | Chiffres, accents, CTA, nœuds du motif |
 
-## Les trois verbes
+> Abandon du corail/teal (v0). Une mono-couleur franche et premium.
 
-| Verbe | Signification |
-|-------|---------------|
-| **Révéler** | Mettre au jour la trame réelle du travail cognitif |
-| **Tisser** | Codesign — relier équipes, tâches, outils |
-| **Reconcevoir** | Redessiner, prouver, passer la main |
+## Typographie
+
+| Rôle | Police | Usage |
+|------|--------|-------|
+| **Display** | Archivo Black (900) | Titres XXL, chiffres géants, wordmark TRAME |
+| **Label** | Space Grotesk | Sous-titres, labels, navigation, menus |
+| **Corps** | Arial | Texte courant, neutre |
+
+## Motif « Trame »
+
+Grille tissée : lignes fines + **nœuds ultramarine en diagonale** — matérialise le nom.
+
+Assets : [`assets/logo-mark.svg`](./assets/logo-mark.svg) · [`assets/logo.svg`](./assets/logo.svg) · [`assets/weave-pattern.svg`](./assets/weave-pattern.svg)
+
+## Principes de mise en page (deck → web)
+
+| Pattern deck | Application web |
+|--------------|-----------------|
+| Slides statement pleine page | Hero, 88% géant, CTA en aplat bleu |
+| Colonnes éditoriales 01–04 | Méthode, implications, GTM |
+| Data-viz franche 70/20/10 | Section vérité, barres pleine largeur |
+| Offre en menu typographique | Liste à filets sur fond noir |
+| Tableaux à filets fins | Douleurs avant/après |
+| Asymétrie + titres calés à gauche | Grilles asymétriques, vide assumé |
+
+## Logo & wordmark
+
+- **Mark** : grille 3×3 + nœuds diagonaux bleu
+- **Wordmark** : TRAME en Archivo Black, tracking serré
+- Fichiers : `logo.svg`, `logo-mark.svg`
+
+## Assets produits
+
+- [x] Logo mark (SVG)
+- [x] Logo complet (SVG)
+- [x] Motif tissé (SVG pattern)
+- [x] Favicon (`apps/web/src/app/icon.svg`)
+- [x] Apple touch icon
+- [x] Open Graph (`apps/web/public/og-trame.svg`)
+- [ ] Template one-pager Sprint
+- [ ] Export deck PowerPoint/PDF
 
 ## Ton de voix
 
 | Faire | Éviter |
 |-------|--------|
-| Parler effets (temps gagné, charge réduite) | Parler techno (agents, prompts, RAG) |
-| Chiffrer les douleurs | Jargon « workflow cognitif » face client |
-| Être lucide sur les limites (on s'arrête à la preuve) | Promettre l'industrialisation |
-| Codesign, humain, adoption | Hype IA, disruption |
+| Effets chiffrés (temps gagné) | Jargon IA (agents, RAG) |
+| Lucidité (on s'arrête à la preuve) | Hype disruption |
+| Codesign, humain | Gradients néon « AI startup » |
 
-## Palette (proposition v0)
+## Implémentation web
 
-| Token | Hex | Usage |
-|-------|-----|-------|
-| Ink | `#1a1a1f` | Texte principal |
-| Paper | `#f7f5f2` | Fond |
-| Thread | `#c4a882` | Accent — le fil de la trame |
-| Weave | `#2d4a3e` | Structure, profondeur |
-| Muted | `#6b6b73` | Texte secondaire |
+Site : `apps/web/` — tokens CSS `--trame-black`, `--trame-paper`, `--trame-blue`
 
-## Typographie (proposition)
-
-- **Titres** : serif distinctive (ex. Instrument Serif, Fraunces, ou custom)
-- **Corps** : sans géométrique (ex. DM Sans, Outfit)
-
-## Logo
-
-À créer — concept : fil / trame tissée, minimal, monochrome + accent thread.
-
-## Assets à produire
-
-- [ ] Logo (SVG)
-- [ ] Favicon
-- [ ] Open Graph image
-- [ ] Template one-pager Sprint
-- [ ] Slide deck pitch (dérivé du PDF source)
+```bash
+cd apps/web && npm run dev
+```

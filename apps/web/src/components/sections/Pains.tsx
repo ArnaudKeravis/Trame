@@ -1,59 +1,45 @@
-"use client";
-
-import { motion, useReducedMotion } from "framer-motion";
 import { siteContent } from "@/data/site";
-import { ParallaxLayer } from "@/components/ui/ParallaxLayer";
 import { Reveal } from "@/components/ui/Reveal";
+import { SectionLabel } from "@/components/ui/Editorial";
 
 export function Pains() {
   const { pains } = siteContent;
-  const reduced = useReducedMotion();
 
   return (
-    <section className="bg-trame-weave/5 px-6 py-32">
-      <div className="mx-auto max-w-6xl">
+    <section className="section-pad section-y">
+      <div className="mx-auto max-w-[90rem]">
         <Reveal>
-          <h2 className="font-serif text-4xl font-semibold md:text-5xl">
-            {pains.headline}
-          </h2>
+          <SectionLabel>Douleurs chiffrées</SectionLabel>
+          <h2 className="display-title max-w-[14ch]">{pains.headline}</h2>
         </Reveal>
 
-        <div className="mt-16 space-y-6">
-          {pains.items.map((pain, i) => (
-            <ParallaxLayer key={pain.workflow} speed={0.15 + i * 0.05}>
-              <Reveal delay={i * 0.08}>
-                <motion.div
-                  className="rounded-2xl border border-trame-weave/10 bg-trame-surface p-8 md:p-10"
-                  whileHover={reduced ? undefined : { scale: 1.01 }}
-                  transition={{ duration: 0.3 }}
-                >
-                  <p className="text-sm font-medium uppercase tracking-wider text-trame-weave">
+        <div className="mt-16 overflow-x-auto">
+          <div className="min-w-[640px]">
+            <div className="table-row border-t border-trame-black/15 font-label text-[10px] uppercase tracking-[0.16em] text-trame-muted">
+              <span>Workflow</span>
+              <span>Avant</span>
+              <span>Après</span>
+              <span />
+            </div>
+            {pains.items.map((pain, i) => (
+              <Reveal key={pain.workflow} delay={i * 0.06}>
+                <div className="table-row">
+                  <span className="font-label text-xs uppercase tracking-[0.1em] text-trame-black">
                     {pain.workflow}
-                  </p>
-                  <div className="mt-6 flex flex-col gap-4 md:flex-row md:items-center md:gap-12">
-                    <div>
-                      <p className="text-xs uppercase tracking-widest text-trame-muted">
-                        Avant
-                      </p>
-                      <p className="mt-1 text-xl text-trame-muted line-through decoration-trame-thread/50">
-                        {pain.before}
-                      </p>
-                    </div>
-                    <div className="hidden h-px flex-1 thread-line md:block" />
-                    <div className="text-2xl text-trame-thread md:text-3xl">→</div>
-                    <div>
-                      <p className="text-xs uppercase tracking-widest text-trame-weave">
-                        Après
-                      </p>
-                      <p className="mt-1 font-serif text-2xl font-semibold text-trame-ink md:text-3xl">
-                        {pain.after}
-                      </p>
-                    </div>
-                  </div>
-                </motion.div>
+                  </span>
+                  <span className="text-trame-muted line-through decoration-trame-black/20">
+                    {pain.before}
+                  </span>
+                  <span className="font-display text-xl text-trame-blue">
+                    {pain.after}
+                  </span>
+                  <span className="font-display text-2xl text-trame-black/10">
+                    →
+                  </span>
+                </div>
               </Reveal>
-            </ParallaxLayer>
-          ))}
+            ))}
+          </div>
         </div>
       </div>
     </section>

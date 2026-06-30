@@ -1,15 +1,21 @@
+import { Logo } from "@/components/brand/Logo";
+import { TrameWeave } from "@/components/brand/TrameWeave";
+
 export function Footer() {
   return (
-    <footer className="border-t border-trame-thread/20 bg-trame-ink px-6 py-12 text-trame-paper">
-      <div className="mx-auto flex max-w-6xl flex-col gap-6 md:flex-row md:items-end md:justify-between">
+    <footer className="relative overflow-hidden bg-trame-black px-6 py-16 text-trame-paper">
+      <TrameWeave variant="black" opacity={0.5} />
+      <div className="relative mx-auto flex max-w-[90rem] flex-col gap-10 md:flex-row md:items-end md:justify-between">
         <div>
-          <p className="font-serif text-2xl font-semibold">Trame</p>
-          <p className="mt-2 max-w-sm text-sm text-trame-paper/60">
+          <Logo variant="light" />
+          <p className="mt-4 max-w-md text-sm leading-relaxed text-trame-paper/55">
             Le cabinet qui révèle et reconçoit la trame du travail de la
             connaissance — preuve à l&apos;appui.
           </p>
         </div>
-        <p className="text-sm text-trame-paper/40">© {new Date().getFullYear()} Trame</p>
+        <p className="font-label text-xs uppercase tracking-[0.14em] text-trame-paper/35">
+          © {new Date().getFullYear()} Trame
+        </p>
       </div>
     </footer>
   );

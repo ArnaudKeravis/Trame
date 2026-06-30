@@ -1,32 +1,32 @@
 import { siteContent } from "@/data/site";
-import { ParallaxLayer } from "@/components/ui/ParallaxLayer";
+import { TrameWeave } from "@/components/brand/TrameWeave";
 import { Reveal } from "@/components/ui/Reveal";
 
 export function CTA() {
   const { cta } = siteContent;
 
   return (
-    <section id="contact" className="relative overflow-hidden px-6 py-32">
-      <ParallaxLayer
-        className="pointer-events-none absolute left-1/2 top-0 h-96 w-96 -translate-x-1/2 rounded-full bg-trame-thread/10 blur-3xl"
-        speed={0.3}
-      >
-        <div />
-      </ParallaxLayer>
+    <section
+      id="contact"
+      className="relative overflow-hidden bg-trame-blue section-pad section-y text-trame-paper"
+    >
+      <TrameWeave variant="blue" opacity={0.35} />
 
-      <div className="relative mx-auto max-w-3xl text-center">
+      <div className="relative mx-auto max-w-[90rem]">
         <Reveal>
-          <h2 className="font-serif text-4xl font-semibold md:text-5xl">
+          <h2 className="display-title max-w-[14ch] text-trame-paper">
             {cta.headline}
           </h2>
         </Reveal>
         <Reveal delay={0.1}>
-          <p className="mt-6 text-lg text-trame-muted">{cta.description}</p>
+          <p className="mt-8 max-w-xl text-base leading-relaxed text-trame-paper/75">
+            {cta.description}
+          </p>
         </Reveal>
-        <Reveal delay={0.2}>
+        <Reveal delay={0.18}>
           <a
             href={`mailto:${cta.email}`}
-            className="mt-10 inline-block rounded-full bg-trame-weave px-10 py-4 text-sm font-medium text-white transition-transform hover:scale-[1.02]"
+            className="mt-12 inline-flex border border-trame-paper/40 bg-trame-paper px-8 py-4 font-label text-xs font-medium uppercase tracking-[0.14em] text-trame-black transition-opacity hover:opacity-90"
           >
             {cta.button}
           </a>

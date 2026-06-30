@@ -1,46 +1,48 @@
 import { siteContent } from "@/data/site";
 import { Reveal } from "@/components/ui/Reveal";
+import { SectionLabel } from "@/components/ui/Editorial";
 
 export function Offering() {
   const { offering } = siteContent;
 
   return (
-    <section id="offre" className="bg-trame-ink px-6 py-32 text-trame-paper">
-      <div className="mx-auto max-w-6xl">
+    <section id="offre" className="section-pad section-y bg-trame-black text-trame-paper">
+      <div className="mx-auto max-w-[90rem]">
         <Reveal>
-          <h2 className="font-serif text-4xl font-semibold md:text-5xl">
+          <SectionLabel light>L&apos;offre</SectionLabel>
+          <h2 className="display-title max-w-[16ch] text-trame-paper">
             {offering.headline}
           </h2>
         </Reveal>
 
-        <div className="mt-16 grid gap-6 md:grid-cols-2">
+        <div className="mt-16 border-t border-trame-paper/15">
           {offering.tiers.map((tier, i) => {
             const highlighted = "highlight" in tier && tier.highlight;
             return (
-            <Reveal key={tier.name} delay={i * 0.08}>
-              <article
-                className={`relative rounded-2xl p-8 ${
-                  highlighted
-                    ? "border-2 border-trame-thread bg-trame-weave/30"
-                    : "border border-trame-paper/10 bg-trame-paper/5"
-                }`}
-              >
-                {highlighted && (
-                  <span className="absolute -top-3 left-8 rounded-full bg-trame-thread px-4 py-1 text-xs font-medium text-trame-ink">
-                    Cœur de l&apos;offre
-                  </span>
-                )}
-                <p className="text-sm uppercase tracking-wider text-trame-thread">
-                  {tier.duration}
-                </p>
-                <h3 className="mt-3 font-serif text-2xl font-semibold">{tier.name}</h3>
-                <p className="mt-3 text-trame-paper/60">{tier.description}</p>
-                <p className="mt-6 font-serif text-3xl font-semibold text-trame-thread">
-                  {tier.price}
-                </p>
-              </article>
-            </Reveal>
-          );
+              <Reveal key={tier.name} delay={i * 0.06}>
+                <div
+                  className={`menu-row ${highlighted ? "border-l-2 border-l-trame-blue pl-4 -ml-4" : ""}`}
+                >
+                  <div>
+                    <p className="font-label text-[10px] uppercase tracking-[0.16em] text-trame-paper/45">
+                      {tier.duration}
+                      {highlighted && (
+                        <span className="ml-3 text-trame-blue">· Cœur de l&apos;offre</span>
+                      )}
+                    </p>
+                    <h3 className="font-display mt-2 text-xl text-trame-paper md:text-2xl">
+                      {tier.name}
+                    </h3>
+                    <p className="mt-2 max-w-xl text-sm text-trame-paper/55">
+                      {tier.description}
+                    </p>
+                  </div>
+                  <p className="font-display shrink-0 text-2xl text-trame-blue md:text-3xl">
+                    {tier.price}
+                  </p>
+                </div>
+              </Reveal>
+            );
           })}
         </div>
       </div>

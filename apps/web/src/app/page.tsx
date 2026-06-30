@@ -17,7 +17,6 @@ export default function Home() {
       <Header />
       <main>
         <Hero />
-        <div className="thread-line mx-auto max-w-6xl" />
         <Problem />
         <Truth />
         <Proposition />

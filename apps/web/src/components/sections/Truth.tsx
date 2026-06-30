@@ -3,52 +3,62 @@
 import { motion, useReducedMotion } from "framer-motion";
 import { siteContent } from "@/data/site";
 import { Reveal } from "@/components/ui/Reveal";
+import { SectionLabel, Hairline } from "@/components/ui/Editorial";
 
 export function Truth() {
   const { truth } = siteContent;
   const reduced = useReducedMotion();
 
   return (
-    <section className="bg-trame-ink px-6 py-32 text-trame-paper">
-      <div className="mx-auto max-w-6xl">
+    <section className="section-pad section-y bg-trame-black text-trame-paper">
+      <div className="mx-auto max-w-[90rem]">
         <Reveal>
-          <h2 className="max-w-3xl font-serif text-4xl font-semibold leading-tight md:text-5xl">
+          <SectionLabel light>La vérité</SectionLabel>
+          <h2 className="display-title max-w-[18ch] text-trame-paper">
             {truth.headline}
           </h2>
         </Reveal>
 
-        <div className="mt-16 space-y-6">
+        <div className="mt-20 space-y-0">
           {truth.breakdown.map((item, i) => (
-            <Reveal key={item.label} delay={i * 0.08}>
-              <div className="group">
-                <div className="mb-2 flex items-baseline justify-between">
-                  <span className="text-sm uppercase tracking-wider text-trame-paper/50">
+            <Reveal key={item.label} delay={i * 0.06}>
+              <div className="grid grid-cols-[4rem_1fr_auto] items-end gap-4 border-b border-trame-paper/12 py-6 md:grid-cols-[6rem_1fr_auto] md:py-8">
+                <span className="font-display text-2xl text-trame-blue md:text-3xl">
+                  {item.value}%
+                </span>
+                <div>
+                  <p className="font-label text-xs uppercase tracking-[0.14em] text-trame-paper/45">
                     {item.label}
-                  </span>
-                  <span className="font-serif text-2xl font-semibold text-trame-thread">
-                    {item.value}%
-                  </span>
+                  </p>
+                  <div className="mt-3 h-1.5 w-full bg-trame-paper/10">
+                    <motion.div
+                      className="h-full bg-trame-blue"
+                      initial={{ width: reduced ? `${item.value}%` : "0%" }}
+                      whileInView={{ width: `${item.value}%` }}
+                      viewport={{ once: true }}
+                      transition={{
+                        duration: 0.9,
+                        delay: i * 0.12,
+                        ease: [0.22, 1, 0.36, 1],
+                      }}
+                    />
+                  </div>
                 </div>
-                <div className="h-2 overflow-hidden rounded-full bg-trame-paper/10">
-                  <motion.div
-                    className="h-full rounded-full bg-trame-thread"
-                    initial={{ width: reduced ? `${item.value}%` : "0%" }}
-                    whileInView={{ width: `${item.value}%` }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 1, delay: i * 0.15, ease: [0.22, 1, 0.36, 1] }}
-                  />
-                </div>
+                <span className="hidden font-display text-4xl text-trame-paper/20 md:block">
+                  {String(i + 1).padStart(2, "0")}
+                </span>
               </div>
             </Reveal>
           ))}
         </div>
 
-        <Reveal delay={0.3}>
-          <blockquote className="mt-16 border-l-2 border-trame-thread pl-6">
-            <p className="font-serif text-xl italic text-trame-paper/80">
+        <Reveal delay={0.2}>
+          <blockquote className="mt-20 max-w-2xl">
+            <Hairline light />
+            <p className="mt-8 text-lg leading-relaxed text-trame-paper/75">
               « {truth.quote} »
             </p>
-            <cite className="mt-2 block text-sm not-italic text-trame-paper/40">
+            <cite className="font-label mt-4 block text-xs uppercase tracking-[0.14em] not-italic text-trame-paper/40">
               — {truth.source}
             </cite>
           </blockquote>
