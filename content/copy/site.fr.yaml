@@ -1,0 +1,104 @@
+meta:
+  title: Trame
+  tagline: Révéler la trame du travail. La reconcevoir avec l'IA.
+  description: Cabinet de transformation des workflows cognitifs — codesign, preuve rapide, transfert aux équipes.
+
+hero:
+  headline: Révéler la trame du travail
+  subheadline: La reconcevoir avec l'IA.
+  cta_primary: Démarrer un Sprint
+  cta_secondary: Comprendre notre méthode
+
+problem:
+  headline: Tout le monde teste l'IA. Presque personne n'en tire de la valeur.
+  stats:
+    - value: "88%"
+      label: des pilotes d'agents ne passent jamais en production
+    - value: "40%+"
+      label: des projets agentiques annulés d'ici 2027
+
+truth:
+  headline: La valeur n'est pas dans la techno. Elle est dans le travail.
+  breakdown:
+    - label: Algorithmes
+      value: 10
+    - label: Tech & données
+      value: 20
+    - label: Personnes & process
+      value: 70
+
+proposition:
+  headline: Nous ne vendons pas de l'IA. Nous vendons ses effets.
+  not:
+    - Des agents
+    - Des prompts
+    - De l'automatisation
+    - De la tech à intégrer
+  but:
+    - Du temps gagné
+    - Une charge cognitive réduite
+    - Une meilleure capacité d'exécution
+    - Une adoption réussie
+
+workflows:
+  headline: Les workflows cognitifs
+  items:
+    - Recherche & veille
+    - Analyse & synthèse
+    - Recommandations
+    - Préparation de décisions
+    - Coordination & livrables
+    - Création de connaissances
+
+pains:
+  headline: Des douleurs concrètes, chiffrées
+  items:
+    - workflow: Appels d'offres
+      before: 3 jours par pitch
+      after: une demi-journée
+    - workflow: Reporting campagnes
+      before: 2 jours/mois
+      after: 2 heures
+    - workflow: Verbatims clients
+      before: des semaines
+      after: un jour
+    - workflow: Veille concurrence
+      before: éparpillée
+      after: synthèse hebdo
+
+method:
+  headline: Du travail réel à la preuve
+  steps:
+    - id: comprendre
+      title: Comprendre
+      description: Observer le travail réel, les douleurs, l'usage.
+    - id: codesign
+      title: Codesign
+      description: Concevoir le workflow cible avec les équipes.
+    - id: pilote
+      title: Pilote-preuve
+      description: Test-and-learn, fail-fast, démontrer la valeur vite.
+    - id: transfert
+      title: Transfert & mesure
+      description: Passer la main. Mesurer le ROI.
+
+offering:
+  headline: Quatre étages — chacun vend le suivant
+  tiers:
+    - name: Discovery & cadrage
+      duration: 1 semaine
+      price: 3–6 k€
+    - name: Workflow Transformation Sprint
+      duration: 2–3 semaines
+      price: 12–20 k€
+      highlight: true
+    - name: Operating Partner
+      duration: abonnement
+      price: 3–6 k€/mois
+    - name: Accélérateurs
+      duration: produit
+      price: licence
+
+cta:
+  headline: Prêt à révéler la trame de votre travail ?
+  button: Planifier une conversation
