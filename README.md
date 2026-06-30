@@ -59,6 +59,23 @@ npm run dev
 
 Ouvrir [http://localhost:3000](http://localhost:3000).
 
+### Déploiement Vercel
+
+L'app Next.js est dans `apps/web/` (monorepo). **Sans ce réglage, Vercel renvoie une 404.**
+
+1. [vercel.com](https://vercel.com) → ton projet **Trame**
+2. **Settings → Build and Deployment → Root Directory**
+3. Saisir `apps/web` → **Save**
+4. **Deployments → … → Redeploy** (obligatoire après changement)
+
+| Paramètre | Valeur |
+|-----------|--------|
+| Root Directory | `apps/web` |
+| Framework | Next.js |
+| Build Command | `npm run build` (défaut) |
+
+L'URL de production est dans **Settings → Domains** (ex. `trame-xxx.vercel.app`).
+
 ---
 
 ## Offre (résumé)
