@@ -2,13 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { Logo } from "@/components/brand/Logo";
-
-const navItems = [
-  { label: "Problème", href: "#probleme" },
-  { label: "Méthode", href: "#methode" },
-  { label: "Offre", href: "#offre" },
-  { label: "Contact", href: "#contact" },
-];
+import { siteContent } from "@/data/site";
 
 export function Header() {
   const [scrolled, setScrolled] = useState(false);
@@ -29,20 +23,24 @@ export function Header() {
       }`}
     >
       <div className="section-pad mx-auto flex max-w-[90rem] items-center justify-between py-5">
-        <Logo />
+        <Logo variant={scrolled ? "default" : "light"} />
         <nav className="hidden items-center gap-10 md:flex">
-          {navItems.map((item) => (
+          {siteContent.nav.map((item) => (
             <a
               key={item.href}
               href={item.href}
-              className="font-label text-xs uppercase tracking-[0.14em] text-trame-muted transition-colors hover:text-trame-black"
+              className={`font-label text-xs uppercase tracking-[0.14em] transition-colors ${
+                scrolled
+                  ? "text-trame-muted hover:text-trame-black"
+                  : "text-trame-paper/60 hover:text-trame-paper"
+              }`}
             >
               {item.label}
             </a>
           ))}
         </nav>
         <a href="#contact" className="btn-primary py-2.5 text-[0.7rem]">
-          Contact
+          Réserver un diagnostic
         </a>
       </div>
     </header>

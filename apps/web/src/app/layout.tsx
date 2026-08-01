@@ -19,7 +19,7 @@ export const metadata: Metadata = {
   metadataBase: new URL(process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : "http://localhost:3000"),
   title: "Trame — Révéler la trame du travail",
   description:
-    "Cabinet de transformation des workflows cognitifs. Codesign, preuve rapide, transfert aux équipes.",
+    "On récupère les heures que vos tâches répétitives vous volent. Diagnostic en demi-journée, preuve en 10 jours.",
   icons: {
     icon: [{ url: "/logo-mark.svg", type: "image/svg+xml" }],
   },
