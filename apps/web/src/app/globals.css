@@ -1,21 +1,35 @@
 @import "tailwindcss";
 
 :root {
-  --trame-black: #131012;
-  --trame-paper: #ece7dd;
-  --trame-blue: #2c2be8;
-  --trame-muted: color-mix(in srgb, var(--trame-black) 55%, transparent);
-  --background: var(--trame-paper);
-  --foreground: var(--trame-black);
+  --trame-noir: #131012;
+  --trame-os: #ece7dd;
+  --trame-papier: #f6f3ec;
+  --trame-ultramarine: #2c2be8;
+  --trame-ultra-tint: #dad9f7;
+  --trame-gris-chaud: #86837c;
+  --trame-gris-froid: #9d9ba8;
+  --trame-filet-clair: #d4cec1;
+  --trame-filet-sombre: #35322c;
+  --trame-marge: 7vw;
+  /* aliases rétrocompat */
+  --trame-black: var(--trame-noir);
+  --trame-paper: var(--trame-os);
+  --trame-blue: var(--trame-ultramarine);
+  --trame-muted: var(--trame-gris-chaud);
+  --background: var(--trame-os);
+  --foreground: var(--trame-noir);
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --color-trame-black: var(--trame-black);
-  --color-trame-paper: var(--trame-paper);
-  --color-trame-blue: var(--trame-blue);
-  --color-trame-muted: var(--trame-muted);
+  --color-trame-black: var(--trame-noir);
+  --color-trame-paper: var(--trame-os);
+  --color-trame-os: var(--trame-os);
+  --color-trame-papier: var(--trame-papier);
+  --color-trame-blue: var(--trame-ultramarine);
+  --color-trame-muted: var(--trame-gris-chaud);
+  --color-trame-filet: var(--trame-filet-clair);
   --font-display: var(--font-archivo);
   --font-label: var(--font-space-grotesk);
   --font-body: Arial, Helvetica, sans-serif;
@@ -54,17 +68,17 @@ body {
 
 .hairline {
   height: 1px;
-  background: color-mix(in srgb, var(--trame-black) 12%, transparent);
+  background: var(--trame-filet-clair);
 }
 
 .hairline-light {
   height: 1px;
-  background: color-mix(in srgb, var(--trame-paper) 18%, transparent);
+  background: color-mix(in srgb, var(--trame-os) 18%, transparent);
 }
 
 .section-pad {
-  padding-left: clamp(1.5rem, 5vw, 4rem);
-  padding-right: clamp(1.5rem, 5vw, 4rem);
+  padding-left: max(1.5rem, var(--trame-marge));
+  padding-right: max(1.5rem, var(--trame-marge));
 }
 
 .section-y {
@@ -102,7 +116,7 @@ body {
   font-size: clamp(3rem, 6vw, 5rem);
   line-height: 1;
   letter-spacing: -0.03em;
-  color: color-mix(in srgb, var(--trame-black) 8%, transparent);
+  color: var(--trame-ultramarine);
 }
 
 .btn-primary {
@@ -147,7 +161,7 @@ body {
   gap: 1rem;
   align-items: baseline;
   padding: 1.25rem 0;
-  border-bottom: 1px solid color-mix(in srgb, var(--trame-paper) 15%, transparent);
+  border-bottom: 1px solid var(--trame-filet-clair);
 }
 
 .menu-row:last-child {
