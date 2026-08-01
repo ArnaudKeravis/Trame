@@ -4,49 +4,56 @@ import { motion, useReducedMotion } from "framer-motion";
 import { siteContent } from "@/data/site";
 import { TrameWeave } from "@/components/brand/TrameWeave";
 import { Reveal } from "@/components/ui/Reveal";
-import { SectionLabel } from "@/components/ui/Editorial";
+
+function AccentSubheadline({ text, accentWord }: { text: string; accentWord: string }) {
+  const idx = text.indexOf(accentWord);
+  if (idx === -1) {
+    return <span className="text-trame-paper">{text}</span>;
+  }
+  return (
+    <>
+      <span className="text-trame-paper">{text.slice(0, idx)}</span>
+      <span className="text-trame-blue">{accentWord}</span>
+      <span className="text-trame-paper">{text.slice(idx + accentWord.length)}</span>
+    </>
+  );
+}
 
 export function Hero() {
   const reduced = useReducedMotion();
   const { hero } = siteContent;
 
   return (
-    <section className="relative flex min-h-screen items-end overflow-hidden pb-16 pt-28">
-      <TrameWeave opacity={0.55} />
+    <section className="relative flex min-h-screen items-end overflow-hidden bg-trame-black pb-16 pt-28 text-trame-paper">
+      <TrameWeave variant="black" opacity={0.55} />
 
       <div className="section-pad relative mx-auto w-full max-w-[90rem] pb-12 pt-16">
         <Reveal>
-          <SectionLabel>Cabinet · workflows cognitifs</SectionLabel>
-        </Reveal>
-
-        <Reveal delay={0.08}>
-          <h1 className="display-title-xl max-w-[14ch] text-trame-black">
+          <h1 className="display-title-xl max-w-[14ch] text-trame-paper">
             {hero.headline}
           </h1>
         </Reveal>
 
-        <Reveal delay={0.16}>
-          <p className="font-display mt-4 max-w-[18ch] text-2xl text-trame-blue md:text-4xl">
-            {hero.subheadline}
+        <Reveal delay={0.08}>
+          <p className="font-display mt-4 max-w-[20ch] text-2xl md:text-4xl">
+            <AccentSubheadline
+              text={hero.subheadline}
+              accentWord={hero.subheadlineAccentWord}
+            />
           </p>
         </Reveal>
 
         <div className="mt-16 grid gap-12 lg:grid-cols-[1fr_auto] lg:items-end">
-          <Reveal delay={0.24}>
-            <p className="max-w-md text-base leading-relaxed text-trame-muted">
+          <Reveal delay={0.16}>
+            <p className="max-w-md text-base leading-relaxed text-trame-paper/65">
               {hero.description}
             </p>
           </Reveal>
 
-          <Reveal delay={0.32}>
-            <div className="flex flex-wrap gap-3">
-              <a href="#offre" className="btn-primary">
-                Découvrir l&apos;offre
-              </a>
-              <a href="#methode" className="btn-ghost">
-                Notre méthode
-              </a>
-            </div>
+          <Reveal delay={0.24}>
+            <a href={hero.ctaHref} className="btn-primary">
+              {hero.cta}
+            </a>
           </Reveal>
         </div>
 
@@ -56,7 +63,7 @@ export function Hero() {
             animate={{ y: [0, 6, 0] }}
             transition={{ duration: 2.2, repeat: Infinity, ease: "easeInOut" }}
           >
-            <span className="font-label text-[10px] uppercase tracking-[0.2em] text-trame-muted">
+            <span className="font-label text-[10px] uppercase tracking-[0.2em] text-trame-paper/40">
               Scroll
             </span>
           </motion.div>
