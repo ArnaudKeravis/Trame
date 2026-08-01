@@ -1,14 +1,12 @@
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { Hero } from "@/components/sections/Hero";
-import { Problem } from "@/components/sections/Problem";
+import { Pain } from "@/components/sections/Pain";
 import { Truth } from "@/components/sections/Truth";
 import { Proposition } from "@/components/sections/Proposition";
-import { Workflows } from "@/components/sections/Workflows";
-import { Pains } from "@/components/sections/Pains";
 import { Method } from "@/components/sections/Method";
+import { Proof } from "@/components/sections/Proof";
 import { Offering } from "@/components/sections/Offering";
-import { Positioning } from "@/components/sections/Positioning";
 import { CTA } from "@/components/sections/CTA";
 
 export default function Home() {
@@ -17,14 +15,12 @@ export default function Home() {
       <Header />
       <main>
         <Hero />
-        <Problem />
+        <Pain />
         <Truth />
         <Proposition />
-        <Workflows />
-        <Pains />
         <Method />
+        <Proof />
         <Offering />
-        <Positioning />
         <CTA />
       </main>
       <Footer />
