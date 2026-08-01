@@ -1,14 +1,16 @@
-export type Credential = {
+export type TeamMember = {
   id: string;
-  client: string;
-  sector: string;
-  workflow: string;
-  before?: string;
-  after?: string;
-  metric?: string;
-  quote?: string;
-  status: "pilot" | "done";
-  objective?: string;
+  name: string;
+  role: string;
+  bio: string;
+  linkedin?: string;
+};
+
+export type TrackRecordItem = {
+  id: string;
+  value: string;
+  label: string;
+  accent?: boolean;
 };
 
 export const siteContent = {
@@ -112,19 +114,55 @@ export const siteContent = {
     id: "preuve",
     number: "05",
     label: "La preuve",
-    headline: "La preuve, pas la promesse.",
+    headline: "La preuve, c'est qui la porte.",
     description:
-      "Chaque mission devient un credential : workflow, avant, après, le chiffre, la citation du dirigeant.",
-    credentials: [
+      "Pas de logos clients affichés. Trois parcours complémentaires — transformation, digital, produit — au service du travail réel.",
+    team: [
       {
-        id: "romain-vin",
-        client: "Romain",
-        sector: "Négoce de vin",
-        workflow: "Relance client",
-        status: "pilot" as const,
-        objective: "Premier euro attribuable sous 30 jours",
+        id: "arnaud",
+        name: "Arnaud Keravis",
+        role: "Transformation & design",
+        bio: "Group VP Experience, Design & Sodexo Labs. 20 ans à concevoir et déployer la transformation digitale et l'IA appliquée au travail — du codesign à la preuve terrain, à l'échelle.",
+        linkedin: "https://www.linkedin.com/in/arnaudkeravis",
       },
-    ] satisfies Credential[],
+      {
+        id: "paul",
+        name: "Paul Guibert",
+        role: "Stratégie digitale & numérique responsable",
+        bio: "Fondateur de Digital.Green. ~17 ans de stratégie digitale, produit et communication — avec une obsession : que l'IA et le web servent le réel, sans gaspillage.",
+        linkedin: "https://www.linkedin.com/in/paul-guibert-3710326a",
+      },
+      {
+        id: "thomas",
+        name: "Thomas Soucaille",
+        role: "Produit, ops & scale-up",
+        bio: "Co-fondateur de Wenabi (Komeet). Une décennie à bâtir une plateforme SaaS d'impact — produit, ops et croissance — de la table blanche à ~80 personnes.",
+        linkedin: "https://www.linkedin.com/in/thomas-s-a3391212",
+      },
+    ] satisfies TeamMember[],
+    trackRecord: [
+      {
+        id: "xp",
+        value: "20 ans",
+        label: "d'expérience en transformation digitale et design",
+        accent: true,
+      },
+      {
+        id: "clients",
+        value: "100+",
+        label: "clients accompagnés sur des programmes de transformation",
+      },
+      {
+        id: "workflows",
+        value: "30+",
+        label: "workflows cognitifs conçus et mis en œuvre",
+      },
+      {
+        id: "scale",
+        value: "0 → 80",
+        label: "personnes : scale-up produit & ops (Wenabi)",
+      },
+    ] satisfies TrackRecordItem[],
   },
   offering: {
     id: "offre",
