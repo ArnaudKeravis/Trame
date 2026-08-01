@@ -30,14 +30,14 @@ export function Offering() {
               <Reveal key={tier.name} delay={i * 0.06}>
                 <div
                   className={`menu-row ${
-                    highlighted ? "border-l-2 border-l-trame-blue pl-4 -ml-px" : ""
+                    highlighted ? "border-l-2 border-l-trame-black pl-4 -ml-px" : ""
                   }`}
                 >
                   <div>
                     <p className="font-label text-[10px] uppercase tracking-[0.16em] text-trame-muted">
                       {tier.duration}
                       {highlighted && (
-                        <span className="ml-3 text-trame-blue">
+                        <span className="ml-3 text-trame-black">
                           · Cœur de l&apos;offre
                         </span>
                       )}

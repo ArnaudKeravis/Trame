@@ -23,7 +23,9 @@ export function Method() {
           {method.steps.map((step, i) => (
             <Reveal key={step.id} delay={i * 0.08}>
               <article className="border-t border-trame-black/12 py-8 md:border-l md:border-t-0 md:pl-8 md:first:border-l-0 md:first:pl-0 lg:py-0">
-                <span className="editorial-num block">{step.number}</span>
+                <span className="editorial-num block" aria-hidden="true">
+                  {step.number}
+                </span>
                 <h3 className="font-display mt-6 text-xl text-trame-black">
                   {step.title}
                 </h3>
