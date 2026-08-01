@@ -10,10 +10,10 @@ export function Method() {
       <div className="mx-auto max-w-[90rem]">
         <Reveal>
           <div className="flex items-baseline gap-4">
-            <span className="editorial-num" aria-hidden="true">
+            <span className="editorial-num text-trame-black/15" aria-hidden="true">
               {method.number}
             </span>
-            <SectionLabel>{method.label}</SectionLabel>
+            <SectionLabel className="mb-0">{method.label}</SectionLabel>
           </div>
           <h2 className="display-title mt-4 max-w-[14ch]">{method.headline}</h2>
           <p className="mt-4 max-w-md text-trame-muted">{method.subtitle}</p>

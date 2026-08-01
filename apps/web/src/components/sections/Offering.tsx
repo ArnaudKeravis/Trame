@@ -16,7 +16,7 @@ export function Offering() {
             >
               {offering.number}
             </span>
-            <SectionLabel>{offering.label}</SectionLabel>
+            <SectionLabel className="mb-0">{offering.label}</SectionLabel>
           </div>
           <h2 className="display-title mt-4 max-w-[16ch] text-trame-black">
             {offering.headline}

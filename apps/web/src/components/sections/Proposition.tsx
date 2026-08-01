@@ -13,7 +13,7 @@ export function Proposition() {
             <span className="editorial-num" aria-hidden="true">
               {proposition.number}
             </span>
-            <SectionLabel>{proposition.label}</SectionLabel>
+            <SectionLabel className="mb-0">{proposition.label}</SectionLabel>
           </div>
           <h2 className="display-title mt-4 max-w-[16ch]">{proposition.headline}</h2>
         </Reveal>

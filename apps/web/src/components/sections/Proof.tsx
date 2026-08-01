@@ -19,7 +19,7 @@ export function Proof() {
             <span className="editorial-num" aria-hidden="true">
               {proof.number}
             </span>
-            <SectionLabel light>{proof.label}</SectionLabel>
+            <SectionLabel light className="mb-0">{proof.label}</SectionLabel>
           </div>
           <h2 className="display-title mt-4 max-w-[14ch] text-trame-paper">
             {proof.headline}

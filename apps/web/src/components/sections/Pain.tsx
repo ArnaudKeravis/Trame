@@ -13,7 +13,7 @@ export function Pain() {
             <span className="editorial-num" aria-hidden="true">
               {pain.number}
             </span>
-            <SectionLabel>{pain.label}</SectionLabel>
+            <SectionLabel className="mb-0">{pain.label}</SectionLabel>
           </div>
           <h2 className="display-title mt-4 max-w-[22ch] text-trame-black">
             {pain.question}

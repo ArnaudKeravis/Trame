@@ -20,7 +20,7 @@ export function Truth() {
             >
               {truth.number}
             </span>
-            <SectionLabel light>{truth.label}</SectionLabel>
+            <SectionLabel light className="mb-0">{truth.label}</SectionLabel>
           </div>
           <h2 className="display-title mt-4 max-w-[18ch] text-trame-paper">
             {truth.headline}
