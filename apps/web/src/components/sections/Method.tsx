@@ -6,11 +6,16 @@ export function Method() {
   const { method } = siteContent;
 
   return (
-    <section id="methode" className="section-pad section-y bg-trame-paper">
+    <section id={method.id} className="section-pad section-y bg-trame-paper">
       <div className="mx-auto max-w-[90rem]">
         <Reveal>
-          <SectionLabel>Méthode</SectionLabel>
-          <h2 className="display-title max-w-[14ch]">{method.headline}</h2>
+          <div className="flex items-baseline gap-4">
+            <span className="editorial-num" aria-hidden="true">
+              {method.number}
+            </span>
+            <SectionLabel>{method.label}</SectionLabel>
+          </div>
+          <h2 className="display-title mt-4 max-w-[14ch]">{method.headline}</h2>
           <p className="mt-4 max-w-md text-trame-muted">{method.subtitle}</p>
         </Reveal>
 

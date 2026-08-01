@@ -13,8 +13,16 @@ export function Truth() {
     <section className="section-pad section-y bg-trame-black text-trame-paper">
       <div className="mx-auto max-w-[90rem]">
         <Reveal>
-          <SectionLabel light>La vérité</SectionLabel>
-          <h2 className="display-title max-w-[18ch] text-trame-paper">
+          <div className="flex items-baseline gap-4">
+            <span
+              className="editorial-num text-trame-paper/25"
+              aria-hidden="true"
+            >
+              {truth.number}
+            </span>
+            <SectionLabel light>{truth.label}</SectionLabel>
+          </div>
+          <h2 className="display-title mt-4 max-w-[18ch] text-trame-paper">
             {truth.headline}
           </h2>
         </Reveal>
@@ -23,7 +31,11 @@ export function Truth() {
           {truth.breakdown.map((item, i) => (
             <Reveal key={item.label} delay={i * 0.06}>
               <div className="grid grid-cols-[4rem_1fr_auto] items-end gap-4 border-b border-trame-paper/12 py-6 md:grid-cols-[6rem_1fr_auto] md:py-8">
-                <span className="font-display text-2xl text-trame-blue md:text-3xl">
+                <span
+                  className={`font-display text-2xl md:text-3xl ${
+                    item.accent ? "text-trame-blue" : "text-trame-paper/40"
+                  }`}
+                >
                   {item.value}%
                 </span>
                 <div>
@@ -32,7 +44,9 @@ export function Truth() {
                   </p>
                   <div className="mt-3 h-1.5 w-full bg-trame-paper/10">
                     <motion.div
-                      className="h-full bg-trame-blue"
+                      className={
+                        item.accent ? "h-full bg-trame-blue" : "h-full bg-trame-paper/25"
+                      }
                       initial={{ width: reduced ? `${item.value}%` : "0%" }}
                       whileInView={{ width: `${item.value}%` }}
                       viewport={{ once: true }}
