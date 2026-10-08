@@ -48,12 +48,31 @@ export function SiteChrome({ children }: { children: React.ReactNode }) {
     return () => window.removeEventListener("keydown", onKey);
   }, []);
 
+  const [hidden, setHidden] = useState(false);
+
+  useEffect(() => {
+    let last = window.scrollY;
+    function onScroll() {
+      const current = window.scrollY;
+      if (Math.abs(current - last) < 6) return;
+      setHidden(current > last && current > 160);
+      last = current;
+    }
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
   return (
     <>
       <a href="#contenu" className="ddc-skip">
         Aller au contenu
       </a>
-      <header className="sticky top-0 z-40 border-b border-[var(--ddc-line)] bg-[var(--ddc-paper)]">
+      <header
+        className={`ddc-header sticky top-0 z-40 border-b border-[var(--ddc-line)] bg-[var(--ddc-paper)]${
+          hidden && !open ? " is-hidden" : ""
+        }`}
+        onFocusCapture={() => setHidden(false)}
+      >
         <p className="ddc-wrap flex flex-wrap items-center justify-between gap-x-4 gap-y-1 py-2 text-sm text-[var(--ddc-muted)]">
           <span>Prévisualisation. Catalogue et paiement : boutique actuelle.</span>
           <a className="underline underline-offset-4" href={SHOP}>

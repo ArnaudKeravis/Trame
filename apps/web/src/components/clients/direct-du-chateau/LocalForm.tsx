@@ -54,7 +54,7 @@ export function LocalForm({
 
   if (sent) {
     return (
-      <div className="border border-[var(--ddc-line)] bg-white p-6" role="status">
+      <div className="ddc-panel" role="status">
         <h3 className="ddc-display text-4xl">{confirmationTitle}</h3>
         <p className="mt-4 max-w-[65ch] leading-relaxed">{confirmationText}</p>
       </div>
@@ -62,7 +62,7 @@ export function LocalForm({
   }
 
   return (
-    <form onSubmit={onSubmit} className="grid max-w-xl gap-4" noValidate>
+    <form onSubmit={onSubmit} className="ddc-panel grid gap-4" noValidate>
       {fields.map((field) => {
         const invalid = missingName === field.name;
         const describedBy = [field.help ? `${field.name}-help` : "", invalid ? `${field.name}-error` : ""]
