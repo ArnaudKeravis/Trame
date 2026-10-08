@@ -1,0 +1,462 @@
+{
+  "observedAt": "2026-10-07",
+  "source": "https://directduchateau.com/products.json",
+  "products": [
+    {
+      "handle": "blanche-biere-blanche-trouble",
+      "title": "BLANCHE - Bière blanche",
+      "vendor": "Brique House",
+      "tags": [],
+      "variantTitle": "A l'unité",
+      "available": true,
+      "publicPrice": "2.00",
+      "image": "https://cdn.shopify.com/s/files/1/0730/8994/1790/files/Blanche.png?v=1714391309",
+      "body": "Bière de blé classique. Le blé apporte de la fraîcheur et une légère acidité."
+    },
+    {
+      "handle": "ipa-brique-house-biere-ambree",
+      "title": "IPA Brique house - Bière ambrée",
+      "vendor": "Brique House",
+      "tags": [],
+      "variantTitle": "A l'unité",
+      "available": true,
+      "publicPrice": "2.00",
+      "image": "https://cdn.shopify.com/s/files/1/0730/8994/1790/files/IPA.png?v=1714201202",
+      "body": "Bière légèrement ambrée, avec une amertume et une aromatique amenée par les houblons."
+    },
+    {
+      "handle": "copie-de-chateau-gory-bordeaux-bio-2021-rouge",
+      "title": "PILS - Bière blonde",
+      "vendor": "Brique House",
+      "tags": [],
+      "variantTitle": "A l'unité",
+      "available": true,
+      "publicPrice": "2.00",
+      "image": "https://cdn.shopify.com/s/files/1/0730/8994/1790/files/PILS.png?v=1712659087",
+      "body": "Bière de fermentation basse, désaltérante avec une aromatique légèrement houblonnée."
+    },
+    {
+      "handle": "chateau-gory-bordeaux-bio-2021-rouge-copie",
+      "title": "Reflets de Soleil - IGP Atlantique 2023 rouge",
+      "vendor": "Reflets de Soleil",
+      "tags": [],
+      "variantTitle": "A l'unité",
+      "available": true,
+      "publicPrice": "3.06",
+      "image": "https://cdn.shopify.com/s/files/1/0730/8994/1790/files/Refletdesoleilrouge.png?v=1714199010",
+      "body": ""
+    },
+    {
+      "handle": "reflets-de-soleil-igp-atlantique-2023-rouge-copie",
+      "title": "Reflets de Soleil - IGP Atlantique 2023 rosé",
+      "vendor": "Reflets de Soleil",
+      "tags": [],
+      "variantTitle": "A l'unité",
+      "available": true,
+      "publicPrice": "3.06",
+      "image": "https://cdn.shopify.com/s/files/1/0730/8994/1790/files/Refletdesoleilrose.png?v=1714199132",
+      "body": ""
+    },
+    {
+      "handle": "reflets-de-soleil-igp-atlantique-2023-rose-copie",
+      "title": "Reflets de Soleil - IGP Atlantique 2023 blanc",
+      "vendor": "Reflets de Soleil",
+      "tags": [],
+      "variantTitle": "A l'unité",
+      "available": true,
+      "publicPrice": "3.06",
+      "image": "https://cdn.shopify.com/s/files/1/0730/8994/1790/files/Refletdesoleilblanc.png?v=1714199099",
+      "body": ""
+    },
+    {
+      "handle": "reflets-de-soleil-igp-atlantique-2023-blanc-copie",
+      "title": "Château Plantey de Lieujean - Haut Médoc 2020 rouge",
+      "vendor": "Vignobles Bougès",
+      "tags": [],
+      "variantTitle": "A l'unité",
+      "available": true,
+      "publicPrice": "3.56",
+      "image": "https://cdn.shopify.com/s/files/1/0730/8994/1790/files/Chtplanteydelieujean.png?v=1714199055",
+      "body": ""
+    },
+    {
+      "handle": "b-de-bonhoste-cremant-de-bordeaux-2022-rose",
+      "title": "B de Bonhoste - Crémant de Bordeaux 2022 rosé",
+      "vendor": "Vignobles Fournier",
+      "tags": [],
+      "variantTitle": "A l'unité",
+      "available": true,
+      "publicPrice": "9.11",
+      "image": "https://cdn.shopify.com/s/files/1/0730/8994/1790/files/BdeBonhosterose_e5928a98-f792-4b99-9c8c-85e04083d722.png?v=1714142710",
+      "body": ""
+    },
+    {
+      "handle": "b-de-bonhoste-cremant-de-bordeaux-2022-blanc",
+      "title": "B de Bonhoste - Crémant de Bordeaux 2022 blanc",
+      "vendor": "Vignobles Fournier",
+      "tags": [],
+      "variantTitle": "A l'unité",
+      "available": true,
+      "publicPrice": "9.11",
+      "image": "https://cdn.shopify.com/s/files/1/0730/8994/1790/files/BdeBonhosteblanc.png?v=1714142695",
+      "body": ""
+    },
+    {
+      "handle": "florius-igp-pays-doc-2022-blanc",
+      "title": "FLORIUS, Viognier - IGP Pays d'Oc 2022 blanc",
+      "vendor": "Maison Denuzière",
+      "tags": [],
+      "variantTitle": "A l'unité",
+      "available": true,
+      "publicPrice": "3.32",
+      "image": "https://cdn.shopify.com/s/files/1/0730/8994/1790/files/Floriusblanc.png?v=1714143533",
+      "body": ""
+    },
+    {
+      "handle": "florius-igp-pays-doc-2022-rouge",
+      "title": "FLORIUS, Syrah - IGP Pays d'Oc 2022 rouge",
+      "vendor": "Maison Denuzière",
+      "tags": [],
+      "variantTitle": "A l'unité",
+      "available": true,
+      "publicPrice": "3.32",
+      "image": "https://cdn.shopify.com/s/files/1/0730/8994/1790/files/Floriusrouge.png?v=1714143578",
+      "body": ""
+    },
+    {
+      "handle": "olivier-chamard-cotes-du-rhone-2022-rouge",
+      "title": "Olivier de Chamard - Côtes du Rhône 2022 rouge",
+      "vendor": "Olivier de Chamard",
+      "tags": [],
+      "variantTitle": "A l'unité",
+      "available": true,
+      "publicPrice": "3.32",
+      "image": "https://cdn.shopify.com/s/files/1/0730/8994/1790/files/OlivierdeChamard.png?v=1714143329",
+      "body": ""
+    },
+    {
+      "handle": "les-vigatanes-igp-cotes-catalanes-2022-blanc",
+      "title": "Les Vigatanes - IGP Côtes Catalanes 2022 blanc",
+      "vendor": "Arnaud de Villeneuve",
+      "tags": [],
+      "variantTitle": "A l'unité",
+      "available": true,
+      "publicPrice": "3.32",
+      "image": "https://cdn.shopify.com/s/files/1/0730/8994/1790/files/Vigatanesblanc.png?v=1714143791",
+      "body": ""
+    },
+    {
+      "handle": "les-vigatanes-igp-cotes-catalanes-2023-rouge",
+      "title": "Les Vigatanes - IGP Côtes Catalanes 2021 rouge",
+      "vendor": "Arnaud de Villeneuve",
+      "tags": [],
+      "variantTitle": "A l'unité",
+      "available": true,
+      "publicPrice": "3.32",
+      "image": "https://cdn.shopify.com/s/files/1/0730/8994/1790/files/Vigatanesrouge.png?v=1714143810",
+      "body": ""
+    },
+    {
+      "handle": "coeur-du-mont-pinot-noir-2023-vin-de-france-rouge-copie",
+      "title": "Les Vigatanes - IGP Côtes Catalanes 2023 rosé",
+      "vendor": "Arnaud de Villeneuve",
+      "tags": [],
+      "variantTitle": "A l'unité",
+      "available": true,
+      "publicPrice": "3.32",
+      "image": "https://cdn.shopify.com/s/files/1/0730/8994/1790/files/Vigatanesrose.png?v=1714143772",
+      "body": ""
+    },
+    {
+      "handle": "coeur-du-mont-pinot-noir-2023-vin-de-france-rouge",
+      "title": "Cœur du Mont - Pinot Noir 2023 Vin de France rouge",
+      "vendor": "Vignobles Dubard",
+      "tags": [],
+      "variantTitle": "A l'unité",
+      "available": true,
+      "publicPrice": "3.56",
+      "image": "https://cdn.shopify.com/s/files/1/0730/8994/1790/files/PINOTNOIR.png?v=1714057286",
+      "body": ""
+    },
+    {
+      "handle": "coeur-du-mont-syrah-2023-vin-de-france-rouge",
+      "title": "Cœur du Mont - Syrah 2023 Vin de France rouge",
+      "vendor": "Vignobles Dubard",
+      "tags": [],
+      "variantTitle": "A l'unité",
+      "available": true,
+      "publicPrice": "3.56",
+      "image": "https://cdn.shopify.com/s/files/1/0730/8994/1790/files/Syrah.png?v=1714057328",
+      "body": ""
+    },
+    {
+      "handle": "coeur-du-mont-chardonnay-2023-vin-de-france-blanc-copie",
+      "title": "Cœur du Mont - Sauvignon blanc 2023 Vin de France",
+      "vendor": "Vignobles Dubard",
+      "tags": [],
+      "variantTitle": "A l'unité",
+      "available": true,
+      "publicPrice": "3.56",
+      "image": "https://cdn.shopify.com/s/files/1/0730/8994/1790/files/Designsanstitre_1.png?v=1714057305",
+      "body": ""
+    },
+    {
+      "handle": "les-frangins-igp-perigord-2023-moelleux-copie",
+      "title": "Cœur du Mont - Chardonnay 2023 Vin de France blanc",
+      "vendor": "Vignobles Dubard",
+      "tags": [],
+      "variantTitle": "A l'unité",
+      "available": true,
+      "publicPrice": "3.56",
+      "image": "https://cdn.shopify.com/s/files/1/0730/8994/1790/files/CHARDONNAY.png?v=1714057256",
+      "body": ""
+    },
+    {
+      "handle": "les-frangins-igp-perigord-2023-blanc-copie",
+      "title": "Les Frangins - IGP Périgord 2023 moelleux",
+      "vendor": "Famille Desfarges",
+      "tags": [],
+      "variantTitle": "A l'unité",
+      "available": true,
+      "publicPrice": "4.06",
+      "image": "https://cdn.shopify.com/s/files/1/0730/8994/1790/files/Frangineblancmoelleux.png?v=1714143169",
+      "body": ""
+    },
+    {
+      "handle": "les-frangins-igp-perigord-2023-rouge-copie",
+      "title": "Les Frangins - IGP Périgord 2023 blanc",
+      "vendor": "Famille Desfarges",
+      "tags": [],
+      "variantTitle": "A l'unité",
+      "available": true,
+      "publicPrice": "4.06",
+      "image": "https://cdn.shopify.com/s/files/1/0730/8994/1790/files/Franginblanc.png?v=1714143149",
+      "body": ""
+    },
+    {
+      "handle": "chateau-plantey-de-lieujean-haut-medoc-2020-rouge-copie",
+      "title": "Les Frangins - IGP Périgord 2023 rouge",
+      "vendor": "Famille Desfarges",
+      "tags": [],
+      "variantTitle": "A l'unité",
+      "available": true,
+      "publicPrice": "4.06",
+      "image": "https://cdn.shopify.com/s/files/1/0730/8994/1790/files/Franginrouge.png?v=1714143201",
+      "body": ""
+    },
+    {
+      "handle": "chateau-thibeaud-maillet-pomerol",
+      "title": "Château Thibeaud Maillet - Pomerol 2020",
+      "vendor": "Roger Duroux",
+      "tags": [],
+      "variantTitle": "A l'unité",
+      "available": true,
+      "publicPrice": "25.11",
+      "image": "https://cdn.shopify.com/s/files/1/0730/8994/1790/products/thibeaudMaillet.jpg?v=1681976198",
+      "body": "Cépage :100 % Merlot Elevage : Barriques durant 15 mois. Moitié bariques neuves, moitié barriques de 1 an. Trois tonneliers différents : Sylvain (Bordeaux), Vicard (Charente), Cadus (Bourgogne) Un millésime qui s’inscrit, pour la première fois, sous le label HVE (Haute Valeur Environnementale). Sans les contraintes du bio, nous privilégions désormais les espaces enherbés et les petites haies, acteurs de bio-diversité. La plupart de nos produits de traitement sont bio et c’est un prestataire qui s’en charge maintenant. Ainsi pouvons-nous bénéficier de ses infrastructures et aires de lavage écologiques et protéger, par voie de conséquence, à 100 °/°, notre sol. L’été 2019, de par ses fortes chaleurs et la sécheresse qui s’en suivit, a engendré des grains très petits et très concentrés Il en résulte un millésime puissant, plus enrobé que le 2018. Il est étonnamment gourmand et velouté pour un vin aussi jeune. Il possède une belle maturité de fruits noirs. Sa parenté avec le 2016 est frappante : un vin charmeur dès sa jeunesse mais qui n’est pas prêt de s’essouffler. Vinifications : Vendanges manuelles, en cagettes. Tri manuel à réception de vendange. Mise en cuve à basse température et maintien du froid par thermo régulation, pour la macération pré-fermentaire (5/6 jours). Puis fermentation alcoolique 3 semaines avec remontages matin, midi, soir. Quand les sucres sont finis, la cuve est maintenue au chaud pour la macération post-fermentaire."
+    },
+    {
+      "handle": "domaine-du-grand-jour-bordeaux",
+      "title": "Domaine Grand Jour - Bordeaux 2022",
+      "vendor": "Remi Lamerat",
+      "tags": [],
+      "variantTitle": "A l'unité",
+      "available": true,
+      "publicPrice": "7.11",
+      "image": "https://cdn.shopify.com/s/files/1/0730/8994/1790/products/Grandjour.jpg?v=1682061058",
+      "body": "-Monocépage 100% Merlot -14,5% -Rendement 35 hl/ha -Vignes de 70 ans sur sols argilo-calcaires et vignes de 4 ans sur sols argilo-limoneux -Vendange mécanique avec tri embarqué et table de tri vibrante à la réception. -Cuverie Inox -Travail du marc principalement en début de FA (jusqu’à 1050) et mouillages en suivant -Assemblage des premières presses après collage de ces dernières Couleur soutenue, profil de vin plutôt franc et gourmand, facile à boire."
+    },
+    {
+      "handle": "terres-blanches-montlouis-sur-loire",
+      "title": "Terres blanches - Montlouis-sur-Loire 2021",
+      "vendor": "Domaine Vincent Denis",
+      "tags": [],
+      "variantTitle": "A l'unité",
+      "available": true,
+      "publicPrice": "12.31",
+      "image": "https://cdn.shopify.com/s/files/1/0730/8994/1790/products/terresblanches.jpg?v=1681986960",
+      "body": ""
+    },
+    {
+      "handle": "domaine-de-la-perriere-chablis",
+      "title": "Domaine de la Perrière - Chablis 2022",
+      "vendor": "Domaine de la Perrière",
+      "tags": [],
+      "variantTitle": "A l'unité",
+      "available": true,
+      "publicPrice": "11.11",
+      "image": "https://cdn.shopify.com/s/files/1/0730/8994/1790/products/perrierechablis.jpg?v=1682001023",
+      "body": "Vinification et élevage : Pressurage direct suivi d’une clarification par débourbage, fermentation alcoolique puis fermentation malolactique. Élevé durant 8 à 10 mois en cuve inox. Conseils de service : Température de dégustation 12°C. A déguster à l’apéritif, avec du poisson grillé, sushis, viande blanche, plats exotiques, fromages. Notes de dégustation : Robe dorée, limpide, et brillante. Nez minéral, fruits jaunes. La bouche est vive et croquante, équilibrée en acidité, suivie par une fin de bouche légèrement mielleuse."
+    },
+    {
+      "handle": "le-plus-de-gory-cotes-de-castillon-bio",
+      "title": "Le Plus de Gory - Castillon côtes de Bordeaux Bio 2020",
+      "vendor": "Famille Banton Vignerons",
+      "tags": [],
+      "variantTitle": "A l'unité",
+      "available": true,
+      "publicPrice": "5.61",
+      "image": "https://cdn.shopify.com/s/files/1/0730/8994/1790/products/plusdegory_a9fa669a-086c-44b8-b315-6eaf939e5a38.jpg?v=1681976089",
+      "body": ""
+    },
+    {
+      "handle": "sante-fe-igp-atlantique-bio",
+      "title": "Santa Fé - IGP Atlantique Bio",
+      "vendor": "Famille Banton Vignerons",
+      "tags": [],
+      "variantTitle": "A l'unité",
+      "available": true,
+      "publicPrice": "3.32",
+      "image": "https://cdn.shopify.com/s/files/1/0730/8994/1790/files/SANTAFErose.png?v=1714143300",
+      "body": ""
+    },
+    {
+      "handle": "chateau-la-rose-beausejour-saint-emilion-grand-cru-bio",
+      "title": "Château La Rose Beauséjour 2020 - Saint-émilion Grand cru Bio",
+      "vendor": "Famille Banton Vignerons",
+      "tags": [],
+      "variantTitle": "A l'unité",
+      "available": true,
+      "publicPrice": "11.61",
+      "image": "https://cdn.shopify.com/s/files/1/0730/8994/1790/products/LRB.jpg?v=1681976066",
+      "body": ""
+    },
+    {
+      "handle": "en-tete-a-tete",
+      "title": "En tête-à-tête - Bordeaux Bio 2020",
+      "vendor": "Sélectionneurs de moments de vin",
+      "tags": [],
+      "variantTitle": "A l'unité",
+      "available": true,
+      "publicPrice": "4.95",
+      "image": "https://cdn.shopify.com/s/files/1/0730/8994/1790/files/teteatete.jpg?v=1682606988",
+      "body": ""
+    },
+    {
+      "handle": "repas-entre-amis-saint-emilion-grand-cru",
+      "title": "Repas entre amis - Saint-émilion Grand Cru Bio 2019",
+      "vendor": "Sélectionneurs de moments de vin",
+      "tags": [],
+      "variantTitle": "A l'unité",
+      "available": true,
+      "publicPrice": "10.90",
+      "image": "https://cdn.shopify.com/s/files/1/0730/8994/1790/products/entreamisSTEM.jpg?v=1681976264",
+      "body": ""
+    },
+    {
+      "handle": "repas-entre-amis-cotes-de-castillon",
+      "title": "Repas entre amis - Castillon Côtes de Bordeaux Bio",
+      "vendor": "Sélectionneurs de moments de vin",
+      "tags": [],
+      "variantTitle": "A l'unité",
+      "available": true,
+      "publicPrice": "4.06",
+      "image": "https://cdn.shopify.com/s/files/1/0730/8994/1790/products/entreamis.jpg?v=1681976248",
+      "body": ""
+    },
+    {
+      "handle": "retour-de-peche",
+      "title": "Retour de pèche - Bordeaux Bio 2022",
+      "vendor": "Sélectionneurs de moments de vin",
+      "tags": [],
+      "variantTitle": "A l'unité",
+      "available": true,
+      "publicPrice": "4.06",
+      "image": "https://cdn.shopify.com/s/files/1/0730/8994/1790/files/retourdepeche.jpg?v=1682606743",
+      "body": ""
+    },
+    {
+      "handle": "petanque-a-lombre-aoc",
+      "title": "Pétanque à l'ombre - Côtes de Provence Bio",
+      "vendor": "Sélectionneurs de moments de vin",
+      "tags": [],
+      "variantTitle": "A l'unité",
+      "available": true,
+      "publicPrice": "6.01",
+      "image": "https://cdn.shopify.com/s/files/1/0730/8994/1790/products/petanqueprovence.jpg?v=1681976220",
+      "body": ""
+    },
+    {
+      "handle": "vignobles-de-france-caisse-de-10",
+      "title": "Vignobles de France (inclus dégustation digitale guidée)",
+      "vendor": "Flakon",
+      "tags": [
+        "coffret"
+      ],
+      "variantTitle": "Default Title",
+      "available": true,
+      "publicPrice": "31.11",
+      "image": "https://cdn.shopify.com/s/files/1/0730/8994/1790/files/VignoblesDeFrance.jpg?v=1714393493",
+      "body": "Coffret découverte du vin Français à travers 4 appellations reconnues. 4 verres de vin et une expérience digitale de dégustation accessible via un QR code. Château de Saint Martin 2021 - Côte de Provence Cru Classé / rosé L’Etendard Château Valade 2016 - Saint-Emilion Grand Cru / rouge Louis Fusain Vosgros 2018 - Chablis Premier Cru / blanc Château St Roch 2021 - Côtes du Rhône / rouge"
+    },
+    {
+      "handle": "coffret-tour-du-monde",
+      "title": "Tour du Monde (inclus dégustation digitale guidée)",
+      "vendor": "Flakon",
+      "tags": [
+        "coffret"
+      ],
+      "variantTitle": "Default Title",
+      "available": true,
+      "publicPrice": "31.11",
+      "image": "https://cdn.shopify.com/s/files/1/0730/8994/1790/files/Tourdumonde.jpg?v=1714393337",
+      "body": "Coffret découverte du vin à travers 4 pays et 3 continents. 4 verres de vin et une expérience digitale de dégustation accessible via un QR code. Nouvelle Zélande : Sauvignon blanc - Villa Maria Private bin Argentine : Malbec - Piedra Negra Rouge Afrique du Sud : Chenin blanc - Ernst & Gouws Liban : Château Musar Le jeune Rouge"
+    },
+    {
+      "handle": "petanque-a-lombre",
+      "title": "Pétanque à l'ombre - IGP Méditerrannée Bio 2024",
+      "vendor": "Sélectionneurs de moments de vin",
+      "tags": [],
+      "variantTitle": "A l'unité",
+      "available": true,
+      "publicPrice": "4.06",
+      "image": "https://cdn.shopify.com/s/files/1/0730/8994/1790/products/2_45f8e097-933c-44a4-af2e-5ed348ca8b40.jpg?v=1681826470",
+      "body": ""
+    }
+  ],
+  "collections": {
+    "frontpage": [
+      "le-plus-de-gory-cotes-de-castillon-bio",
+      "sante-fe-igp-atlantique-bio",
+      "chateau-la-rose-beausejour-saint-emilion-grand-cru-bio",
+      "petanque-a-lombre",
+      "petanque-a-lombre-aoc",
+      "repas-entre-amis-cotes-de-castillon",
+      "repas-entre-amis-saint-emilion-grand-cru",
+      "en-tete-a-tete",
+      "retour-de-peche",
+      "chateau-thibeaud-maillet-pomerol",
+      "domaine-du-grand-jour-bordeaux",
+      "terres-blanches-montlouis-sur-loire",
+      "domaine-de-la-perriere-chablis",
+      "chateau-gory-bordeaux-bio-2021-rouge-copie",
+      "reflets-de-soleil-igp-atlantique-2023-rouge-copie",
+      "reflets-de-soleil-igp-atlantique-2023-rose-copie",
+      "reflets-de-soleil-igp-atlantique-2023-blanc-copie",
+      "chateau-plantey-de-lieujean-haut-medoc-2020-rouge-copie",
+      "les-frangins-igp-perigord-2023-rouge-copie",
+      "les-frangins-igp-perigord-2023-blanc-copie",
+      "les-frangins-igp-perigord-2023-moelleux-copie",
+      "coeur-du-mont-chardonnay-2023-vin-de-france-blanc-copie",
+      "coeur-du-mont-syrah-2023-vin-de-france-rouge",
+      "coeur-du-mont-pinot-noir-2023-vin-de-france-rouge",
+      "coeur-du-mont-pinot-noir-2023-vin-de-france-rouge-copie",
+      "les-vigatanes-igp-cotes-catalanes-2023-rouge",
+      "les-vigatanes-igp-cotes-catalanes-2022-blanc",
+      "olivier-chamard-cotes-du-rhone-2022-rouge",
+      "florius-igp-pays-doc-2022-rouge",
+      "florius-igp-pays-doc-2022-blanc",
+      "b-de-bonhoste-cremant-de-bordeaux-2022-blanc",
+      "b-de-bonhoste-cremant-de-bordeaux-2022-rose"
+    ],
+    "bieres": [
+      "blanche-biere-blanche-trouble",
+      "ipa-brique-house-biere-ambree",
+      "copie-de-chateau-gory-bordeaux-bio-2021-rouge"
+    ],
+    "coffrets-cadeaux": [
+      "vignobles-de-france-caisse-de-10",
+      "coffret-tour-du-monde"
+    ]
+  }
+}

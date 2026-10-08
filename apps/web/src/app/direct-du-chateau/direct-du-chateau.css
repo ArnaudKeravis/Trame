@@ -1,0 +1,233 @@
+.ddc-root {
+  --ddc-paper: #f4f0e6;
+  --ddc-ink: #1c1917;
+  --ddc-action: #6b2433;
+  --ddc-action-hover: #541c28;
+  --ddc-muted: #5c564e;
+  --ddc-line: #e4d9c8;
+  --ddc-display: var(--font-ddc-display), Georgia, "Times New Roman", serif;
+  --ddc-sans: var(--font-ddc-sans), "Public Sans", "Segoe UI", sans-serif;
+  background: var(--ddc-paper);
+  color: var(--ddc-ink);
+  color-scheme: light;
+  font-family: var(--ddc-sans);
+  font-size: 1rem;
+  line-height: 1.5;
+  overflow-x: clip;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.ddc-root :where(a, button, input, select, textarea, summary) {
+  touch-action: manipulation;
+}
+
+.ddc-root :focus:not(:focus-visible) {
+  outline: none;
+}
+
+.ddc-root :focus-visible {
+  outline: 2px solid var(--ddc-ink);
+  outline-offset: 3px;
+}
+
+.ddc-root h1,
+.ddc-root h2,
+.ddc-root h3 {
+  scroll-margin-top: 7rem;
+  text-wrap: balance;
+}
+
+.ddc-display {
+  font-family: var(--ddc-display);
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  line-height: 1.05;
+}
+
+.ddc-wrap {
+  width: min(1120px, calc(100% - 48px));
+  margin-inline: auto;
+}
+
+.ddc-measure {
+  max-width: 65ch;
+}
+
+.ddc-section {
+  padding-block: 2.5rem;
+}
+
+.ddc-hero {
+  display: grid;
+  gap: 2rem;
+  align-items: start;
+  padding-block: 2rem 1rem;
+}
+
+.ddc-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-top: 1.5rem;
+}
+
+.ddc-button,
+.ddc-button-quiet {
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: 0.5rem 1rem;
+  border: 1px solid transparent;
+  font: inherit;
+  font-weight: 500;
+  line-height: 1.2;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color 160ms ease, color 160ms ease, border-color 160ms ease;
+}
+
+.ddc-button {
+  background: var(--ddc-action);
+  color: #fff;
+}
+
+.ddc-button:hover {
+  background: var(--ddc-action-hover);
+}
+
+.ddc-button-quiet {
+  border-color: var(--ddc-ink);
+  background: transparent;
+  color: var(--ddc-ink);
+}
+
+.ddc-button-quiet:hover {
+  background: var(--ddc-ink);
+  color: var(--ddc-paper);
+}
+
+.ddc-skip {
+  position: absolute;
+  left: 1rem;
+  top: 0;
+  z-index: 50;
+  transform: translateY(-120%);
+  background: var(--ddc-ink);
+  color: var(--ddc-paper);
+  padding: 0.75rem 1rem;
+}
+
+.ddc-skip:focus {
+  transform: none;
+}
+
+.ddc-cards {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.ddc-bottle {
+  display: grid;
+  gap: 0.5rem;
+  color: inherit;
+  text-decoration: none;
+  min-width: 0;
+}
+
+.ddc-bottle img {
+  width: 100%;
+  height: auto;
+  background: #fff;
+}
+
+.ddc-steps {
+  display: grid;
+  gap: 1rem;
+  margin: 0;
+  padding-left: 1.25rem;
+  list-style: decimal;
+}
+
+.ddc-domains {
+  display: grid;
+  gap: 0;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.ddc-domains li {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 0.5rem 1.5rem;
+  padding-block: 0.85rem;
+  border-top: 1px solid var(--ddc-line);
+}
+
+.ddc-domains a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+}
+
+.ddc-note {
+  border-top: 1px solid var(--ddc-line);
+  color: var(--ddc-muted);
+  font-size: 0.95rem;
+}
+
+.ddc-root input,
+.ddc-root select,
+.ddc-root textarea {
+  width: 100%;
+  border: 1px solid var(--ddc-line);
+  background: #fff;
+  color: var(--ddc-ink);
+  font: inherit;
+}
+
+.ddc-root input,
+.ddc-root select {
+  min-height: 44px;
+  padding-inline: 0.75rem;
+}
+
+.ddc-root textarea {
+  padding: 0.75rem;
+}
+
+@media (min-width: 640px) {
+  .ddc-actions {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  .ddc-cards {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 900px) {
+  .ddc-section {
+    padding-block: 4rem;
+  }
+
+  .ddc-hero {
+    grid-template-columns: minmax(0, 1.15fr) minmax(280px, 0.85fr);
+    gap: 3rem;
+    padding-block: 3rem 1rem;
+  }
+
+  .ddc-cards-4 {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ddc-button,
+  .ddc-button-quiet {
+    transition: none;
+  }
+}
