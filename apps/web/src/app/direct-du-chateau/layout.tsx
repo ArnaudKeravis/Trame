@@ -4,7 +4,7 @@ import "./direct-du-chateau.css";
 
 const display = Newsreader({
   subsets: ["latin"],
-  weight: ["500", "600"],
+  axes: ["opsz"],
   variable: "--font-ddc-display",
   display: "swap",
 });

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
+import { featuredBottles } from "@/components/clients/direct-du-chateau/home/bottles";
 import { Gate } from "../Gate";
 import { DDC_COOKIE, DDC_TOKEN, safeNext } from "@/lib/ddc-access";
 
@@ -18,5 +19,5 @@ export default async function AccesPage({
   if (jar.get(DDC_COOKIE)?.value === DDC_TOKEN) redirect("/direct-du-chateau");
 
   const { next } = await searchParams;
-  return <Gate nextPath={safeNext(next)} />;
+  return <Gate nextPath={safeNext(next)} bottles={featuredBottles(2)} />;
 }

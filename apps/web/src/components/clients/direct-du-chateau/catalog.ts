@@ -138,6 +138,17 @@ export function wineVendors() {
   ].sort((a, b) => a.localeCompare(b, "fr"));
 }
 
+export function isCutout(product: CatalogProduct) {
+  return Boolean(product.image && product.image.split("?")[0].toLowerCase().endsWith(".png"));
+}
+
+export function cutoutWines() {
+  const order: Record<string, number> = { rouge: 0, "rosé": 1, blanc: 2 };
+  return productsInCollection("frontpage")
+    .filter(isCutout)
+    .sort((a, b) => (order[mentionFromTitle(a) ?? "blanc"] ?? 3) - (order[mentionFromTitle(b) ?? "blanc"] ?? 3));
+}
+
 export function productsByVendor(vendor: string) {
   return products.filter((product) => product.vendor === vendor);
 }
