@@ -11,9 +11,6 @@ import {
   BASE,
   isCutout,
   productsByVendor,
-  shopCollection,
-  SHOP,
-  shopSearch,
   wineVendors,
 } from "@/components/clients/direct-du-chateau/catalog";
 
@@ -94,7 +91,7 @@ const previewNotice =
 const domains: Domain[] = wineVendors().map((name) => {
   const wines = productsByVendor(name).filter((product) => product.family === "vin");
   const cutout = wines.find(isCutout);
-  return { name, count: wines.length, href: shopSearch(name), image: cutout?.image ?? null };
+  return { name, count: wines.length, image: cutout?.image ?? null };
 });
 
 export default async function EditorialPage({ params }: { params: Promise<{ slug: string }> }) {
@@ -140,7 +137,7 @@ function Partners({ title, bottles }: { title: string; bottles: ReturnType<typeo
             </h2>
             <p className="ddc-measure mt-6">
               Le chiffre est le nombre de vins du domaine dans ce catalogue. Survolez un nom pour voir une bouteille
-              photographiée, ouvrez-le pour ses vins sur la boutique.
+              photographiée.
             </p>
           </div>
           <DomainIndex domains={domains} />
@@ -152,12 +149,9 @@ function Partners({ title, bottles }: { title: string; bottles: ReturnType<typeo
             Leurs vins
           </h2>
           <p className="ddc-measure mt-6">
-            Les fiches, les millésimes et les conditions de commande sont sur la boutique. Cette page ne recopie ni les prix
-            ni les stocks.
+            Les fiches, les millésimes et les conditions de commande ne sont pas ouverts depuis ce site. Cette page ne
+            recopie ni les prix ni les stocks.
           </p>
-          <a className="ddc-button ddc-button-on-dark mt-8 inline-flex" href={shopCollection("frontpage")}>
-            Explorer tous les vins
-          </a>
           <BottleStrip bottles={featuredBottles(7, 8)} label="Bouteilles photographiées du catalogue" />
           <p className="ddc-band-note">Bouteilles photographiées du catalogue public. Prix et commande sur la boutique.</p>
         </div>
@@ -237,10 +231,7 @@ function Shipping({ title, bottles }: { title: string; bottles: ReturnType<typeo
             pas affichés.
           </p>
           <div className="ddc-actions">
-            <a className="ddc-button ddc-button-on-dark inline-flex" href={shopCollection("frontpage")}>
-              Explorer les vins
-            </a>
-            <Link className="ddc-button-quiet-on-dark inline-flex" href={`${BASE}/pages/contact`}>
+            <Link className="ddc-button ddc-button-on-dark inline-flex" href={`${BASE}/pages/contact`}>
               Contacter l’équipe
             </Link>
           </div>
@@ -306,12 +297,9 @@ function Account({ title, bottles }: { title: string; bottles: ReturnType<typeof
           Déjà client
         </h2>
         <p className="ddc-measure mt-6">
-          Vous disposez déjà d’un compte approuvé&nbsp;? Utilisez la connexion de la boutique pour retrouver les
-          informations liées à votre entreprise. Aucun mot de passe n’est enregistré sur cette prévisualisation.
+          Vous disposez déjà d’un compte approuvé&nbsp;? La connexion n’est pas proposée sur cette prévisualisation. Aucun
+          mot de passe n’est enregistré ici.
         </p>
-        <a className="ddc-button-quiet mt-8 inline-flex" href={`${SHOP}/account/login`}>
-          Déjà client&nbsp;? Se connecter
-        </a>
       </section>
       <section className="ddc-wrap ddc-section-x" aria-labelledby="faq">
         <h2 id="faq" className="ddc-section-title">
@@ -422,9 +410,8 @@ function Restaurants({ title, bottles }: { title: string; bottles: ReturnType<ty
         bottles={bottles}
         lede={
           <p>
-            Votre carte des vins reflète les choix de votre établissement. Découvrez les cuvées des propriétés partenaires,
-            comparez appellations et millésimes disponibles, puis ouvrez les fiches de la boutique avant de composer votre
-            sélection.
+            Votre carte des vins reflète les choix de votre établissement. Découvrez les cuvées des propriétés partenaires
+            et comparez appellations et millésimes disponibles avant de composer votre sélection.
           </p>
         }
       />
@@ -435,11 +422,8 @@ function Restaurants({ title, bottles }: { title: string; bottles: ReturnType<ty
           </h2>
           <p className="ddc-measure mt-6">
             Une shortlist de 6 à 12 cuvées devait être choisie avec le responsable commercial. Elle ne l’a pas été. Cette
-            page ne présente donc pas une sélection inventée. Le catalogue public est le point d’accès.
+            page ne présente donc pas une sélection inventée.
           </p>
-          <a className="ddc-button ddc-button-on-dark mt-8 inline-flex" href={shopCollection("frontpage")}>
-            Voir les vins
-          </a>
           <BottleStrip bottles={featuredBottles(4, 8)} label="Bouteilles photographiées du catalogue" />
           <p className="ddc-band-note">Bouteilles photographiées du catalogue public. Prix et commande sur la boutique.</p>
         </div>
@@ -491,8 +475,8 @@ function Cavistes({ title, bottles }: { title: string; bottles: ReturnType<typeo
         bottles={bottles}
         lede={
           <p>
-            Pour choisir les vins que vous présenterez en boutique, partez des domaines réellement présents au catalogue,
-            puis ouvrez leurs fiches. Les histoires de familles ne sont pas publiées tant qu’elles ne sont pas vérifiées.
+            Pour choisir les vins que vous présenterez, partez des domaines réellement présents au catalogue. Les histoires
+            de familles ne sont pas publiées tant qu’elles ne sont pas vérifiées.
           </p>
         }
       />
@@ -522,9 +506,6 @@ function Cavistes({ title, bottles }: { title: string; bottles: ReturnType<typeo
             Seules les références actives de la boutique sont à retenir. Aucune fiche téléchargeable n’est proposée&nbsp;:
             l’entreprise n’en a pas fourni.
           </p>
-          <a className="ddc-button ddc-button-on-dark mt-8 inline-flex" href={shopCollection("frontpage")}>
-            Voir les vins
-          </a>
           <BottleStrip bottles={featuredBottles(11, 8)} label="Bouteilles photographiées du catalogue" />
           <p className="ddc-band-note">Bouteilles photographiées du catalogue public. Prix et commande sur la boutique.</p>
         </div>

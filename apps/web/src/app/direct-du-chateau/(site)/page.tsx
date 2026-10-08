@@ -12,9 +12,6 @@ import {
   isCutout,
   productsByVendor,
   productsInCollection,
-  shopCollection,
-  shopProduct,
-  shopSearch,
   wineVendors,
   type CatalogProduct,
 } from "@/components/clients/direct-du-chateau/catalog";
@@ -36,7 +33,6 @@ function toBottle(product: CatalogProduct): Bottle {
     title: product.title,
     vendor: product.vendor,
     image: product.image ?? "",
-    href: shopProduct(product.handle),
   };
 }
 
@@ -66,7 +62,7 @@ export default function HomePage() {
   const domains: Domain[] = wineVendors().map((name) => {
     const wines = productsByVendor(name).filter((product) => product.family === "vin");
     const cutout = wines.find(isCutout);
-    return { name, count: wines.length, href: shopSearch(name), image: cutout?.image ?? null };
+    return { name, count: wines.length, image: cutout?.image ?? null };
   });
 
   return (
@@ -81,10 +77,7 @@ export default function HomePage() {
               composer votre sélection.
             </p>
             <div className="ddc-actions ddc-rise" style={{ animationDelay: "220ms" }}>
-              <a className="ddc-button inline-flex" href={shopCollection("frontpage")}>
-                Découvrir les vins
-              </a>
-              <Link className="ddc-button-quiet inline-flex" href={`${BASE}/pages/compte-professionnel`}>
+              <Link className="ddc-button inline-flex" href={`${BASE}/pages/compte-professionnel`}>
                 Demander un compte professionnel
               </Link>
             </div>
@@ -120,12 +113,9 @@ export default function HomePage() {
           sur chaque fiche les informations disponibles sur le vin et ses conditions de commande.
         </p>
         <p className="ddc-rack-note">
-          {rack.length} bouteilles photographiées sur {wineCount} vins, catalogue observé le {observedDate}. Prix et
-          commande sur la boutique.
+          {rack.length} bouteilles photographiées sur {wineCount} vins, catalogue observé le {observedDate}. Les fiches,
+          les prix et la commande ne sont pas ouverts depuis ce site.
         </p>
-        <a className="ddc-button ddc-button-on-dark inline-flex" href={shopCollection("frontpage")}>
-          Voir les {wineCount} vins
-        </a>
       </RackScroll>
 
       <section className="ddc-wrap ddc-section-x" aria-labelledby="familles">
@@ -135,8 +125,8 @@ export default function HomePage() {
               Rencontrez les familles de vignerons
             </h2>
             <p className="ddc-measure mt-6">
-              Derrière chaque cuvée, un domaine de la sélection. Survolez un nom pour voir l’une de ses bouteilles,
-              ouvrez-le pour ses vins sur la boutique. Les portraits et biographies restent à valider.
+              Derrière chaque cuvée, un domaine de la sélection. Survolez un nom pour voir l’une de ses bouteilles. Les
+              portraits et biographies restent à valider.
             </p>
             <Link className="ddc-button-quiet mt-8 inline-flex" href={`${BASE}/pages/nos-partenaires`}>
               Voir les domaines
@@ -163,10 +153,7 @@ export default function HomePage() {
                 1
               </span>
               <h3>Parcourir</h3>
-              <p>Les vins et leurs fiches sont sur la boutique. Les domaines sont présentés ici.</p>
-              <a className="ddc-inline-link" href={shopCollection("frontpage")}>
-                Découvrir les vins
-              </a>
+              <p>Les vins et leurs fiches ne sont pas ouverts depuis ce site. Les domaines sont présentés ici.</p>
             </li>
             <li>
               <span className="ddc-step-number" aria-hidden="true">

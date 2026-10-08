@@ -43,19 +43,6 @@ export const products: CatalogProduct[] = source.products.map((product) => ({
 }));
 
 export const BASE = "/direct-du-chateau";
-export const SHOP = "https://directduchateau.com";
-
-export function shopProduct(handle: string) {
-  return `${SHOP}/products/${handle}`;
-}
-
-export function shopCollection(handle: string) {
-  return `${SHOP}/collections/${handle}`;
-}
-
-export function shopSearch(query: string) {
-  return `${SHOP}/search?q=${encodeURIComponent(query)}`;
-}
 
 export const collections = {
   frontpage: {

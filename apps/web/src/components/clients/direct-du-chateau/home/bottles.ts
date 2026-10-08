@@ -1,4 +1,4 @@
-import { cutoutWines, shopProduct, type CatalogProduct } from "../catalog";
+import { cutoutWines, type CatalogProduct } from "../catalog";
 import type { Bottle } from "./types";
 
 export function toBottle(product: CatalogProduct): Bottle {
@@ -7,7 +7,6 @@ export function toBottle(product: CatalogProduct): Bottle {
     title: product.title,
     vendor: product.vendor,
     image: product.image ?? "",
-    href: shopProduct(product.handle),
   };
 }
 

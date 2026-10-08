@@ -1,12 +1,11 @@
 import Image from "next/image";
 import type { CatalogProduct } from "./catalog";
-import { shopProduct } from "./catalog";
 
 export function BottleLink({ product }: { product: CatalogProduct }) {
   if (!product.image) return null;
 
   return (
-    <a href={shopProduct(product.handle)} className="ddc-bottle">
+    <div className="ddc-bottle">
       <Image
         src={product.image}
         alt={`Photo du catalogue public : ${product.title}.`}
@@ -16,6 +15,6 @@ export function BottleLink({ product }: { product: CatalogProduct }) {
       />
       <span className="font-medium">{product.title}</span>
       <span className="text-sm text-[var(--ddc-muted)]">{product.vendor}</span>
-    </a>
+    </div>
   );
 }

@@ -3,5 +3,4 @@ export type Bottle = {
   title: string;
   vendor: string;
   image: string;
-  href: string;
 };
