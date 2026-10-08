@@ -17,16 +17,6 @@ export function RackScroll({ bottles, children }: { bottles: Bottle[]; children:
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end end"] });
   const x = useTransform(scrollYProgress, [0, 1], ["0vw", `-${travel}vw`]);
 
-  function revealCard(index: number) {
-    const section = ref.current;
-    if (!pinned || !section) return;
-    const distance = section.offsetHeight - window.innerHeight;
-    const top = section.getBoundingClientRect().top + window.scrollY;
-    const cardStart = INTRO_VW + index * CARD_VW;
-    const ratio = Math.min(1, Math.max(0, (cardStart - 50 + CARD_VW / 2) / travel));
-    window.scrollTo({ top: top + distance * ratio, behavior: "instant" });
-  }
-
   return (
     <section
       ref={ref}
@@ -38,9 +28,9 @@ export function RackScroll({ bottles, children }: { bottles: Bottle[]; children:
         <motion.div className={pinned ? "ddc-rack-track is-pinned" : "ddc-rack-track"} style={pinned ? { x } : undefined}>
           <div className="ddc-rack-intro">{children}</div>
           <ul className="ddc-rack-list">
-            {bottles.map((bottle, index) => (
+            {bottles.map((bottle) => (
               <li key={bottle.handle} className="ddc-rack-cell">
-                <a href={bottle.href} className="ddc-rack-link" onFocus={() => revealCard(index)}>
+                <div className="ddc-rack-link">
                   <span className="ddc-rack-niche">
                     <Image
                       src={bottle.image}
@@ -52,7 +42,7 @@ export function RackScroll({ bottles, children }: { bottles: Bottle[]; children:
                   </span>
                   <span className="ddc-rack-name">{bottle.title}</span>
                   <span className="ddc-rack-vendor">{bottle.vendor}</span>
-                </a>
+                </div>
               </li>
             ))}
           </ul>

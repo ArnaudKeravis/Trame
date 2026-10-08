@@ -2,13 +2,12 @@
 
 import Image from "next/image";
 import { AnimatePresence, motion, useMotionValue, useSpring } from "framer-motion";
-import { useEffect, useState, type FocusEvent, type PointerEvent } from "react";
+import { useEffect, useState, type PointerEvent } from "react";
 import { useMotionOk } from "./useMotionOk";
 
 export type Domain = {
   name: string;
   count: number;
-  href: string;
   image: string | null;
 };
 
@@ -38,33 +37,19 @@ export function DomainIndex({ domains }: { domains: Domain[] }) {
     if (domain && domain !== current) setCurrent(domain);
   }
 
-  function onFocusRow(domain: Domain, event: FocusEvent<HTMLAnchorElement>) {
-    if (!active) return;
-    const box = event.currentTarget.getBoundingClientRect();
-    rawX.set(box.right - 160);
-    rawY.set(box.top + box.height / 2);
-    setCurrent(domain);
-  }
-
   return (
     <>
       <ul className="ddc-index" onPointerMove={onMove} onPointerLeave={() => setCurrent(null)}>
         {domains.map((domain, index) => (
           <li key={domain.name}>
-            <a
-              href={domain.href}
-              className="ddc-index-row"
-              data-domain={index}
-              onFocus={(event) => onFocusRow(domain, event)}
-              onBlur={() => setCurrent(null)}
-            >
+            <div className="ddc-index-row" data-domain={index}>
               <span className="ddc-index-name" translate="no">
                 {domain.name}
               </span>
               <span className="ddc-index-count">
                 {domain.count} vin{domain.count > 1 ? "s" : ""}
               </span>
-            </a>
+            </div>
           </li>
         ))}
       </ul>

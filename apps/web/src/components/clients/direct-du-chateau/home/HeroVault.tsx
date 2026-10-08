@@ -48,11 +48,10 @@ function VaultBottle({
         animationDelay: `${180 + index * 90}ms`,
       }}
     >
-      <motion.a
-        href={bottle.href}
+      <motion.div
         className="ddc-vault-bottle block h-full"
         style={active ? { x: shiftX, y } : undefined}
-        aria-label={`${bottle.title}, fiche sur la boutique`}
+        aria-hidden="true"
       >
         <Image
           src={bottle.image}
@@ -62,7 +61,7 @@ function VaultBottle({
           sizes="(min-width: 900px) 160px, 22vw"
           className="object-cover"
         />
-      </motion.a>
+      </motion.div>
     </div>
   );
 }
