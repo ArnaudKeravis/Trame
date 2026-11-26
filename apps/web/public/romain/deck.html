@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta name="robots" content="noindex, nofollow" />
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Direct du Château × Trame — 4 décembre 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Space+Grotesk:wght@500;600&display=swap" />
+<style>
+:root{
+  --ink:#131012; --bone:#ECE7DD; --paper:#F6F3EC; --ultra:#2C2BE8;
+  --grey:#86837C; --hair:#D4CEC1; --hair-d:#35322C; --tint:#DAD9F7;
+  --f-d:"Archivo Black",Arial Black,Arial,sans-serif;
+  --f-u:"Space Grotesk",system-ui,sans-serif;
+  --f-b:Arial,Helvetica,sans-serif;
+}
+*{box-sizing:border-box}
+html,body{margin:0;height:100%;background:var(--ink);color:var(--bone);font-family:var(--f-b)}
+.deck{height:100vh;overflow:hidden;position:relative}
+.slide{
+  display:none;height:100vh;padding:7vh 7vw;position:relative;
+  flex-direction:column;justify-content:space-between;gap:2.5vh;
+}
+.slide.on{display:flex}
+.slide.light{background:var(--bone);color:var(--ink)}
+.slide.paper{background:var(--paper);color:var(--ink)}
+.slide.dark{background:var(--ink);color:var(--bone)}
+.kicker{font-family:var(--f-u);font-weight:600;font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--ultra)}
+.slide.dark .kicker{color:var(--tint)}
+h1{font-family:var(--f-d);font-size:clamp(36px,5.2vw,64px);line-height:.94;margin:0;max-width:16ch;letter-spacing:-.01em}
+h2{font-family:var(--f-d);font-size:clamp(28px,3.6vw,44px);line-height:.96;margin:0;max-width:22ch}
+h3{font-family:var(--f-u);font-weight:600;font-size:14px;letter-spacing:.1em;text-transform:uppercase;margin:0 0 8px;color:var(--grey)}
+.slide.dark h3{color:var(--grey)}
+p,li{font-size:clamp(15px,1.35vw,19px);line-height:1.45;margin:0}
+.lead{font-size:clamp(17px,1.6vw,22px);max-width:48ch;color:var(--grey)}
+.slide.dark .lead{color:#A29E95}
+.row{display:flex;gap:2.5vw;align-items:flex-start;flex-wrap:wrap}
+.col{flex:1;min-width:220px}
+.num{font-family:var(--f-d);font-size:clamp(40px,5vw,64px);line-height:.9;color:var(--ultra)}
+.num small{display:block;font-family:var(--f-u);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--grey);margin-top:10px;font-weight:600}
+.quote{font-family:var(--f-d);font-size:clamp(22px,2.8vw,34px);line-height:1.05;max-width:22ch}
+.hair{border:0;border-top:1px solid var(--hair);margin:0}
+.slide.dark .hair{border-color:var(--hair-d)}
+.footer{display:flex;justify-content:space-between;align-items:center;font-family:var(--f-u);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--grey);padding-top:1.5vh}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:2vw}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:1.8vw}
+.grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:1.5vw}
+@media (max-width:900px){.grid2,.grid3,.grid4{grid-template-columns:1fr}}
+.card{border-top:1px solid var(--hair);padding-top:14px}
+.slide.dark .card{border-color:var(--hair-d)}
+.tag{display:inline-block;font-family:var(--f-u);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ultra);margin-bottom:8px}
+.list{display:flex;flex-direction:column;gap:10px;padding:0;margin:0;list-style:none}
+.list li{padding-left:0;border-top:1px solid var(--hair);padding-top:10px}
+.slide.dark .list li{border-color:var(--hair-d)}
+.agenda{display:flex;flex-direction:column;gap:0}
+.agenda .a{
+  display:grid;grid-template-columns:90px 1fr 140px;gap:16px;align-items:baseline;
+  border-top:1px solid var(--hair);padding:14px 0;
+}
+.slide.dark .agenda .a{border-color:var(--hair-d)}
+.agenda .t{font-family:var(--f-d);font-size:28px;color:var(--ultra)}
+.agenda .d{font-family:var(--f-u);font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--grey)}
+.before-after{display:grid;grid-template-columns:1fr 1fr;gap:3vw}
+.ba h3{color:var(--ultra)}
+.nav{
+  position:fixed;right:18px;bottom:18px;display:flex;gap:8px;z-index:5;
+  font-family:var(--f-u);font-size:12px;
+}
+.nav button{
+  background:var(--paper);color:var(--ink);border:1px solid var(--hair);
+  padding:8px 12px;cursor:pointer;font-family:inherit;font-weight:600;letter-spacing:.06em;text-transform:uppercase;
+}
+.nav button:hover{border-color:var(--ink)}
+.progress{position:fixed;left:0;top:0;height:3px;background:var(--ultra);width:0;z-index:6}
+.section{font-family:var(--f-d);font-size:72px;line-height:.85;color:var(--ultra);margin:0}
+.tiny{font-size:13px;color:var(--grey);max-width:60ch}
+.pill{font-family:var(--f-u);font-size:11px;letter-spacing:.1em;text-transform:uppercase;border:1px solid currentColor;padding:4px 8px;display:inline-block}
+</style>
+</head>
+<body>
+<div class="progress" id="bar"></div>
+<div class="deck" id="deck">
+
+<!-- 1 -->
+<section class="slide dark on" data-i="1">
+  <div>
+    <div class="kicker">Direct du Château × Trame</div>
+    <h1 style="margin-top:18px;max-width:14ch">Ce qu’on a compris.<br>Ce qu’on teste aujourd’hui.</h1>
+    <p class="lead" style="margin-top:22px">Vendredi 4 décembre 2026 · demi-journée chez vous</p>
+  </div>
+  <div class="footer"><span>Restitution + prise en main</span><span>01 / 12</span></div>
+</section>
+
+<!-- 2 -->
+<section class="slide light" data-i="2">
+  <div>
+    <div class="kicker">Aujourd’hui</div>
+    <h2 style="margin:14px 0 28px">Trois blocs. Un objectif.</h2>
+    <div class="agenda">
+      <div class="a"><div class="t">30 min</div><div><strong>Ce que nous avons compris</strong><br><span class="tiny">Votre activité, vos données, l’assistant commandes</span></div><div class="d">Deck</div></div>
+      <div class="a"><div class="t">1–1h30</div><div><strong>Vos commandes aujourd’hui</strong><br><span class="tiny">Deux commandes chronométrées, comme d’habitude</span></div><div class="d">Vis ma vie</div></div>
+      <div class="a"><div class="t">1 h</div><div><strong>L’assistant en main</strong><br><span class="tiny">Deux commandes avec l’outil, puis vos retours</span></div><div class="d">Essai</div></div>
+    </div>
+  </div>
+  <div class="footer"><span>Objectif : décider ensemble des deux semaines d’essai</span><span>02 / 12</span></div>
+</section>
+
+<!-- 3 -->
+<section class="slide paper" data-i="3">
+  <div>
+    <div class="kicker">01 · Ce que vous nous avez dit</div>
+    <h2 style="margin:14px 0 28px">Pas un problème de commerce. Un problème de capacité.</h2>
+    <div class="grid4">
+      <div><div class="num">1,31 M€<small>CA 2025 · +6 %</small></div></div>
+      <div><div class="num">7–10 h<small>par semaine sur commande → facture</small></div></div>
+      <div><div class="num">80<small>clients facturés en 2026</small></div></div>
+      <div><div class="num">57 %<small>du CA en grande distribution</small></div></div>
+    </div>
+    <p class="quote" style="margin-top:36px">« Je suis curieux de l’assistant de commande. »</p>
+  </div>
+  <div class="footer"><span>Call du 2 octobre · comptes 2025 · Pennylane 2026</span><span>03 / 12</span></div>
+</section>
+
+<!-- 4 -->
+<section class="slide light" data-i="4">
+  <div>
+    <div class="kicker">02 · Ce que montrent vos données</div>
+    <h2 style="margin:14px 0 24px">Les gros font le chiffre. Les petits font le travail. L’écrit fait 87 % du CA.</h2>
+    <div class="grid3">
+      <div class="card">
+        <div class="tag">Grande distribution</div>
+        <p><strong>57 % du chiffre</strong><br>18 % des lignes à saisir</p>
+      </div>
+      <div class="card">
+        <div class="tag">Restaurants, tabacs, épiceries</div>
+        <p><strong>7 % du chiffre</strong><br>49 % des lignes à saisir</p>
+      </div>
+      <div class="card">
+        <div class="tag">Ce que lit l’assistant d’abord</div>
+        <p><strong>Mail, bon de commande, EDI</strong><br>87 % du CA arrive par écrit</p>
+      </div>
+    </div>
+    <p class="tiny" style="margin-top:28px">Trois comptes = 49 % du CA : Carrefour / MJB, Diapart, Système U. Automatiser la saisie sert d’abord la charge ; développer, c’est d’abord les gros.</p>
+  </div>
+  <div class="footer"><span>Factures 14/01 → 01/10/2026 · analyse juillet–sept.</span><span>04 / 12</span></div>
+</section>
+
+<!-- 5 -->
+<section class="slide dark" data-i="5">
+  <div>
+    <div class="kicker">03 · Ce qu’on vous propose</div>
+    <h2 style="margin:14px 0 32px;color:var(--bone)">Libérer. Anticiper. Développer.</h2>
+    <div class="grid3">
+      <div class="card">
+        <div class="tag">0–3 mois</div>
+        <h3 style="color:var(--bone)">Libérer</h3>
+        <p>La commande et la facture se préparent sans vous. Vous relisez et envoyez.</p>
+      </div>
+      <div class="card">
+        <div class="tag">1–6 mois</div>
+        <h3 style="color:var(--bone)">Anticiper</h3>
+        <p>Voir les ruptures et le stock qui dort avant qu’ils coûtent.</p>
+      </div>
+      <div class="card">
+        <div class="tag">3–12 mois</div>
+        <h3 style="color:var(--bone)">Développer</h3>
+        <p>Le temps gagné va aux comptes programme, aux clients qui ralentissent, aux foires.</p>
+      </div>
+    </div>
+    <p class="lead" style="margin-top:28px">Fondation : un référentiel produits, prix et stock, tenu à jour, validé par vous.</p>
+  </div>
+  <div class="footer"><span>Chaque mouvement finance le suivant</span><span>05 / 12</span></div>
+</section>
+
+<!-- 6 -->
+<section class="slide paper" data-i="6">
+  <div>
+    <div class="kicker">Par où on commence</div>
+    <h2 style="margin:14px 0 24px">Libérer · l’assistant commandes</h2>
+    <div class="grid2">
+      <div>
+        <ul class="list">
+          <li><strong>1 · La commande</strong> — lit l’écrit, reconnaît le cas (stock, direct, achat), prépare BL et mails.</li>
+          <li><strong>2 · La facture</strong> — la prépare dès le BL émis (vente franco).</li>
+          <li><strong>Principe</strong> — l’assistant prépare, vous décidez. Rien ne part sans vous.</li>
+        </ul>
+      </div>
+      <div>
+        <div class="num">≈ 3 h<small>par semaine visées · à chronométrer aujourd’hui</small></div>
+        <p style="margin-top:24px" class="tiny">Vous l’avez choisi le 15 octobre. La vigie stock (meilleur score) attend un fichier EDMT chaque lundi — on le prépare, on ne le livre pas aujourd’hui.</p>
+      </div>
+    </div>
+  </div>
+  <div class="footer"><span>Zéro changement pour vos clients</span><span>06 / 12</span></div>
+</section>
+
+<!-- 7 -->
+<section class="slide light" data-i="7">
+  <div>
+    <div class="kicker">Zoom · avant / après</div>
+    <h2 style="margin:14px 0 28px">Une commande, aujourd’hui et avec l’assistant</h2>
+    <div class="before-after">
+      <div class="ba">
+        <h3>Aujourd’hui</h3>
+        <ul class="list">
+          <li>Vous lisez le mail ou le PDF</li>
+          <li>Vous ressaisissez le BL dans Pennylane</li>
+          <li>Vous vérifiez le stock, vous écrivez les mails</li>
+          <li>Vous refaites la facture depuis le BL</li>
+        </ul>
+      </div>
+      <div class="ba">
+        <h3>Avec l’assistant</h3>
+        <ul class="list">
+          <li>Il lit et reconnaît client, références, cas</li>
+          <li>Il propose le BL et les mails en brouillon</li>
+          <li>Vous relisez, corrigez, envoyez</li>
+          <li>Il prépare la facture dès le BL validé</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="footer"><span>Prix et quantités toujours relus au départ</span><span>07 / 12</span></div>
+</section>
+
+<!-- 8 -->
+<section class="slide paper" data-i="8">
+  <div>
+    <div class="kicker">Zoom · trois cas</div>
+    <h2 style="margin:14px 0 24px">Il reconnaît le circuit et prépare ce qu’il faut</h2>
+    <div class="grid3">
+      <div class="card">
+        <div class="tag">En stock</div>
+        <p><strong>Entrepôt EDMT</strong><br>BL · mail entrepôt · transport · facture à la sortie</p>
+      </div>
+      <div class="card">
+        <div class="tag">En direct</div>
+        <p><strong>Le vigneron livre</strong><br>Commande par domaine · transport · facture à l’expédition</p>
+      </div>
+      <div class="card">
+        <div class="tag">À acheter</div>
+        <p><strong>Hors stock</strong><br>Commande vigneron · enlèvement · puis comme en stock</p>
+      </div>
+    </div>
+    <p class="tiny" style="margin-top:28px">Aujourd’hui on teste surtout le cas <strong>en stock</strong> (mails libres et bons de commande servis depuis l’entrepôt) — le seul flux bout-en-bout prêt.</p>
+  </div>
+  <div class="footer"><span>Rien ne part sans votre validation</span><span>08 / 12</span></div>
+</section>
+
+<!-- 9 -->
+<section class="slide dark" data-i="9">
+  <div>
+    <div class="kicker">Où on en est · 4 décembre</div>
+    <h2 style="margin:14px 0 28px;color:var(--bone)">La V0 existe. On la confronte à votre vrai rythme.</h2>
+    <div class="grid3">
+      <div class="card">
+        <div class="num" style="font-size:42px">≈ 80 %<small>base clients reconstituée</small></div>
+      </div>
+      <div class="card">
+        <div class="num" style="font-size:42px">85 %<small>prix d’achat fiables</small></div>
+      </div>
+      <div class="card">
+        <div class="num" style="font-size:42px">V0<small>commande → prix → récap → BL → mails → facture brouillon</small></div>
+      </div>
+    </div>
+    <p class="lead" style="margin-top:28px">Run en parallèle déjà lancé sur vos commandes. Aujourd’hui : mesurer le gain, pas convaincre avec des slides.</p>
+  </div>
+  <div class="footer"><span>Weekly Trame du 20 novembre</span><span>09 / 12</span></div>
+</section>
+
+<!-- 10 -->
+<section class="slide light" data-i="10">
+  <div>
+    <div class="kicker">Ce qu’on mesure aujourd’hui</div>
+    <h2 style="margin:14px 0 24px">Deux sans outil. Deux avec. Les minutes et les corrections.</h2>
+    <div class="grid2">
+      <div>
+        <ul class="list">
+          <li><strong>Périmètre</strong> — mails libres + bons de commande, stock entrepôt</li>
+          <li><strong>Chrono</strong> — lecture → BL → mails (méthode actuelle vs assistant)</li>
+          <li><strong>Qualité</strong> — corrections + erreurs silencieuses (cible : zéro)</li>
+        </ul>
+      </div>
+      <div>
+        <ul class="list">
+          <li><strong>Seuil d’usage</strong> — ~80 % de cas justes, sinon vous corrigez trop</li>
+          <li><strong>Factures</strong> — validées à la main au départ (1 mois)</li>
+          <li><strong>Ensuite</strong> — 2 semaines d’essai si ça tient la route</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="footer"><span>On arrête les slides. On regarde comment vous faites.</span><span>10 / 12</span></div>
+</section>
+
+<!-- 11 -->
+<section class="slide paper" data-i="11">
+  <div>
+    <div class="kicker">À décider ensemble · fin de journée</div>
+    <h2 style="margin:14px 0 24px">Quatre questions. Des réponses nettes.</h2>
+    <div class="grid2">
+      <ol class="list" style="list-style:decimal;padding-left:18px">
+        <li style="border:0;padding-top:0"><strong>Deux semaines d’essai</strong> — l’assistant prépare, vous gardez l’envoi</li>
+        <li><strong>Excel clients &amp; prix</strong> — comment vous voulez les confirmer</li>
+        <li><strong>Règles des trois cas</strong> — qui livre quoi, quel transporteur, quand facturer</li>
+        <li><strong>Stock du lundi</strong> — prévenir l’entrepôt pour préparer « Anticiper »</li>
+      </ol>
+      <div>
+        <p class="quote">Objectif : ~3 h / semaine rendues dès que l’essai tient.</p>
+        <p class="tiny" style="margin-top:20px">Si le gain n’est pas là, on ajuste ou on arrête. Pas de théâtre.</p>
+      </div>
+    </div>
+  </div>
+  <div class="footer"><span>Direct du Château × Trame</span><span>11 / 12</span></div>
+</section>
+
+<!-- 12 -->
+<section class="slide dark" data-i="12">
+  <div style="display:flex;flex-direction:column;justify-content:center;flex:1;gap:24px">
+    <div class="kicker">Transition</div>
+    <h1 style="max-width:12ch">À vous.<br>On chronomètre.</h1>
+    <p class="lead">Bloc suivant : deux commandes comme d’habitude. Puis l’assistant.</p>
+  </div>
+  <div class="footer"><span>Vis ma vie → outil → retours</span><span>12 / 12</span></div>
+</section>
+
+</div>
+
+<div class="nav">
+  <button type="button" id="prev" aria-label="Précédent">←</button>
+  <button type="button" id="next" aria-label="Suivant">→</button>
+</div>
+
+<script>
+(function(){
+  const slides=[...document.querySelectorAll('.slide')];
+  let i=0;
+  const bar=document.getElementById('bar');
+  function show(n){
+    i=Math.max(0,Math.min(slides.length-1,n));
+    slides.forEach((s,k)=>s.classList.toggle('on',k===i));
+    bar.style.width=((i+1)/slides.length*100)+'%';
+  }
+  document.getElementById('prev').onclick=()=>show(i-1);
+  document.getElementById('next').onclick=()=>show(i+1);
+  window.addEventListener('keydown',e=>{
+    if(e.key==='ArrowRight'||e.key==='PageDown'||e.key===' '){e.preventDefault();show(i+1)}
+    if(e.key==='ArrowLeft'||e.key==='PageUp'){e.preventDefault();show(i-1)}
+    if(e.key==='Home')show(0);
+    if(e.key==='End')show(slides.length-1);
+  });
+  show(0);
+})();
+</script>
+</body>
+</html>

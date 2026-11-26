@@ -1,0 +1,690 @@
+<!doctype html><html><head>
+<meta name="robots" content="noindex, nofollow" /><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Prise de commande DDC</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Space+Grotesk:wght@500;600&display=swap">
+<style>
+/* Layout : trois colonnes de travail — le client (gauche), la commande (centre), ce que l'agent prépare (droite). Une seule couleur d'accent, l'ultramarine Trame. */
+:root{
+  --bg:#ECE7DD; --surface:#F6F3EC; --surface-2:#FFFFFF; --ink:#131012; --muted:#6F6B63; --line:#D4CEC1;
+  --accent:#2C2BE8; --accent-ink:#FFFFFF; --accent-tint:#DAD9F7;
+  --ok:#2E6B47; --ok-tint:#DCEBDF; --warn:#8A5A00; --warn-tint:#F3E4C4; --crit:#A3261E; --crit-tint:#F4D8D4;
+  --f-display:"Archivo Black","Arial Black",Arial,sans-serif;
+  --f-label:"Space Grotesk",Inter,Arial,sans-serif;
+  --f-body:Arial,Helvetica,sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#131012; --surface:#1B181A; --surface-2:#221F21; --ink:#ECE7DD; --muted:#A29E95; --line:#35322C;
+  --accent:#7C7BF5; --accent-ink:#131012; --accent-tint:#26254A;
+  --ok:#7CC49A; --ok-tint:#1E3327; --warn:#E3B45C; --warn-tint:#3A2E15; --crit:#F08A80; --crit-tint:#3D1C19; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#131012; --surface:#1B181A; --surface-2:#221F21; --ink:#ECE7DD; --muted:#A29E95; --line:#35322C;
+  --accent:#7C7BF5; --accent-ink:#131012; --accent-tint:#26254A;
+  --ok:#7CC49A; --ok-tint:#1E3327; --warn:#E3B45C; --warn-tint:#3A2E15; --crit:#F08A80; --crit-tint:#3D1C19; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:14px;line-height:1.45;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:16px 32px}
+h1,h2,h3{margin:0;text-wrap:balance}
+.top{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:8px 24px;padding-bottom:14px;border-bottom:1px solid var(--line);margin-bottom:16px}
+.brand{display:flex;align-items:center;gap:12px}
+.mark{width:28px;height:28px;flex:none}
+h1{font-family:var(--f-display);font-size:22px;letter-spacing:-.01em}
+.kicker{font-family:var(--f-label);font-weight:600;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent)}
+.sub{color:var(--muted);font-size:12.5px;max-width:62ch}
+.grid{display:grid;grid-template-columns:minmax(230px,270px) minmax(0,1fr) minmax(300px,380px);gap:16px;align-items:start}
+@media (max-width:1150px){.grid{grid-template-columns:minmax(240px,290px) minmax(0,1fr)}.col-out{grid-column:1/-1}}
+@media (max-width:760px){.grid{grid-template-columns:minmax(0,1fr)}}
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:14px;display:flex;flex-direction:column;gap:12px;min-width:0}
+.panel h2{font-family:var(--f-label);font-weight:600;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.col{display:flex;flex-direction:column;gap:16px;min-width:0}
+label{font-family:var(--f-label);font-weight:500;font-size:12px;color:var(--muted);display:block;margin-bottom:4px}
+input,select,textarea{font:inherit;color:var(--ink);background:var(--surface-2);border:1px solid var(--line);border-radius:4px;padding:7px 9px;width:100%;min-width:0}
+textarea{resize:vertical;min-height:84px}
+input:focus-visible,select:focus-visible,textarea:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
+button{font-family:var(--f-label);font-weight:600;font-size:13px;border-radius:4px;border:1px solid var(--line);background:var(--surface-2);color:var(--ink);padding:7px 12px;cursor:pointer}
+button:hover{border-color:var(--ink)}
+button.primary{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+button.ghost{background:transparent;border-color:transparent;color:var(--accent);padding:4px 6px}
+button:disabled{opacity:.5;cursor:default}
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+@media (max-width:480px){.two{grid-template-columns:1fr}}
+/* clients */
+.clist{display:flex;flex-direction:column;max-height:300px;overflow:auto;border:1px solid var(--line);border-radius:4px;background:var(--surface-2)}
+.citem{display:flex;justify-content:space-between;gap:8px;padding:7px 9px;border:0;border-bottom:1px solid var(--line);border-radius:0;background:transparent;text-align:left;font-family:var(--f-body);font-weight:400}
+.citem:last-child{border-bottom:0}
+.citem.on{background:var(--accent-tint)}
+.citem b{font-weight:600}
+.citem small{color:var(--muted);white-space:nowrap}
+.chip{display:inline-flex;align-items:center;gap:4px;font-family:var(--f-label);font-weight:500;font-size:11px;padding:2px 8px;border-radius:999px;border:1px solid var(--line);color:var(--muted);background:var(--surface-2);white-space:nowrap}
+.chip.ok{color:var(--ok);background:var(--ok-tint);border-color:transparent}
+.chip.warn{color:var(--warn);background:var(--warn-tint);border-color:transparent}
+.chip.crit{color:var(--crit);background:var(--crit-tint);border-color:transparent}
+.chip.acc{color:var(--accent);background:var(--accent-tint);border-color:transparent}
+button.chip{cursor:pointer}
+.fiche dl{display:grid;grid-template-columns:auto 1fr;gap:4px 12px;margin:0}
+.fiche dt{color:var(--muted);font-size:12.5px}
+.fiche dd{margin:0;font-variant-numeric:tabular-nums}
+.cname{font-family:var(--f-display);font-size:17px;line-height:1.15}
+.refs{display:flex;flex-wrap:wrap;gap:6px}
+.hist{display:flex;flex-direction:column;gap:6px}
+.hist .h{display:flex;justify-content:space-between;gap:8px;border-top:1px solid var(--line);padding-top:6px;font-size:13px}
+.empty{color:var(--muted);font-size:13px}
+/* commande */
+.seg{display:inline-flex;border:1px solid var(--line);border-radius:4px;overflow:hidden;flex-wrap:wrap}
+.seg button{border:0;border-radius:0;border-right:1px solid var(--line);background:var(--surface-2);font-weight:500}
+.seg button:last-child{border-right:0}
+.seg button[aria-pressed="true"]{background:var(--ink);color:var(--bg)}
+.tablewrap{overflow-x:auto}
+table{border-collapse:collapse;width:100%;min-width:620px}
+th{font-family:var(--f-label);font-weight:500;font-size:11.5px;color:var(--muted);text-align:left;padding:4px 6px;border-bottom:1px solid var(--line)}
+td{padding:5px 6px;border-bottom:1px solid var(--line);vertical-align:middle}
+td.num{font-variant-numeric:tabular-nums;text-align:right;white-space:nowrap}
+td input,td select{padding:5px 7px}
+.qty{width:64px}
+td select{width:auto;min-width:108px}
+td:first-child{min-width:230px}
+.price{width:84px}
+.mailbox{border:1px dashed var(--line);border-radius:4px;padding:10px;display:flex;flex-direction:column;gap:8px;background:var(--surface-2)}
+.status{font-size:12.5px;color:var(--muted)}
+.ex{font-family:var(--f-label);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--warn)}
+/* sorties */
+.cas{border:1px solid var(--line);border-radius:6px;padding:12px;background:var(--surface-2);display:flex;flex-direction:column;gap:6px}
+.cas .big{font-family:var(--f-display);font-size:24px;line-height:1}
+.cas.c-stock .big{color:var(--ok)}
+.cas.c-achat .big{color:var(--warn)}
+.cas.c-direct .big{color:var(--accent)}
+.cas.c-mixte .big,.cas.c-vide .big{color:var(--crit)}
+.why{color:var(--muted);font-size:13px}
+.checks{display:flex;flex-direction:column;gap:5px;margin:0;padding:0;list-style:none}
+.checks li{display:flex;gap:8px;align-items:flex-start;font-size:13px}
+.checks li::before{content:"";flex:none;width:8px;height:8px;margin-top:5px;border-radius:2px;background:var(--warn)}
+.checks li.okk::before{background:var(--ok)}
+.tabs{display:flex;gap:4px;flex-wrap:wrap;border-bottom:1px solid var(--line)}
+.tabs button{border:0;border-bottom:2px solid transparent;border-radius:0;background:transparent;padding:6px 10px;color:var(--muted)}
+.tabs button[aria-selected="true"]{color:var(--ink);border-bottom-color:var(--accent)}
+.doc{background:var(--surface-2);border:1px solid var(--line);border-radius:4px;padding:12px;font-size:13px;display:flex;flex-direction:column;gap:8px;min-width:0}
+.doc pre{white-space:pre-wrap;word-break:break-word;margin:0;font-family:var(--f-body);font-size:13px}
+.doc .dh{display:flex;justify-content:space-between;gap:8px;align-items:center;flex-wrap:wrap}
+.doc .dt{font-family:var(--f-label);font-weight:600;font-size:12px;letter-spacing:.08em;text-transform:uppercase}
+.doc table{min-width:0;font-size:12.5px}
+.foot{margin-top:20px;color:var(--muted);font-size:12px;border-top:1px solid var(--line);padding-top:10px;max-width:110ch}
+.toast{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(16px + env(safe-area-inset-bottom,0px));background:var(--ink);color:var(--bg);padding:8px 14px;border-radius:4px;font-family:var(--f-label);font-size:13px;opacity:0;pointer-events:none;transition:opacity .2s}
+.toast.show{opacity:1}
+@media (prefers-reduced-motion:reduce){.toast{transition:none}}
+</style>
+
+<header class="top">
+  <div class="brand">
+    <svg class="mark" viewBox="0 0 40 40" aria-hidden="true">
+      <g stroke="var(--line)" stroke-width="1">
+        <line x1="2" y1="2" x2="2" y2="38"/><line x1="11" y1="2" x2="11" y2="38"/><line x1="29" y1="2" x2="29" y2="38"/><line x1="38" y1="2" x2="38" y2="38"/>
+        <line x1="2" y1="2" x2="38" y2="2"/><line x1="2" y1="20" x2="38" y2="20"/><line x1="2" y1="29" x2="38" y2="29"/><line x1="2" y1="38" x2="38" y2="38"/>
+      </g>
+      <line x1="2" y1="11" x2="38" y2="11" stroke="var(--accent)" stroke-width="3"/>
+      <line x1="20" y1="2" x2="20" y2="38" stroke="var(--accent)" stroke-width="3"/>
+      <rect x="17.5" y="8.5" width="5" height="5" fill="var(--accent)"/>
+    </svg>
+    <div>
+      <div class="kicker">Direct du Château × Trame · prototype agent 1</div>
+      <h1>Prise de commande</h1>
+    </div>
+  </div>
+  <p class="sub">Choisissez le client, collez le mail ou saisissez l'appel : l'écran reconnaît le cas (stock, direct, achat) et prépare le BL, les mails et la facture. Tout reste en brouillon, rien n'est envoyé.</p>
+</header>
+
+<main class="grid">
+  <!-- Client -->
+  <section class="col">
+    <div class="panel">
+      <h2>Client</h2>
+      <div>
+        <label for="q">Rechercher un client</label>
+        <input id="q" type="search" placeholder="Nom, ville ou type de client" autocomplete="off">
+      </div>
+      <div class="clist" id="clist" role="listbox" aria-label="Clients"></div>
+    </div>
+    <div class="panel fiche" id="fiche"></div>
+    <div class="panel">
+      <h2>Historique</h2>
+      <div class="hist" id="hist"></div>
+    </div>
+  </section>
+
+  <!-- Commande -->
+  <section class="col">
+    <div class="panel">
+      <div class="row" style="justify-content:space-between">
+        <h2>Nouvelle commande</h2>
+        <span class="ex" id="exflag">Exemple</span>
+      </div>
+      <div>
+        <label>Canal</label>
+        <div class="seg" id="canal" role="group" aria-label="Canal">
+          <button type="button" data-v="mail" aria-pressed="true">Mail</button>
+          <button type="button" data-v="tel" aria-pressed="false">Téléphone</button>
+          <button type="button" data-v="bdc" aria-pressed="false">Bon de commande</button>
+          <button type="button" data-v="edi" aria-pressed="false">EDI</button>
+        </div>
+      </div>
+      <div class="mailbox" id="mailbox">
+        <label for="mail" style="margin:0">Coller le mail ou le texte du bon de commande</label>
+        <textarea id="mail" placeholder="Bonjour Romain, pouvez-vous nous livrer…"></textarea>
+        <div class="row">
+          <button type="button" class="primary" id="readBtn" hidden>Lire avec Claude</button>
+          <button type="button" class="ghost" id="exMail">Coller un exemple</button>
+          <span class="status" id="readStatus"></span>
+        </div>
+      </div>
+      <div class="two">
+        <div><label for="num">N° de commande client</label><input id="num" autocomplete="off"></div>
+        <div><label for="dliv">Date de livraison ou d'enlèvement</label><input id="dliv" type="date"></div>
+      </div>
+      <div><label for="adr">Adresse de livraison</label><input id="adr" autocomplete="off"></div>
+      <div>
+        <label>Lignes</label>
+        <div class="tablewrap">
+          <table>
+            <thead><tr><th>Référence</th><th>Qté</th><th>Unité</th><th>Prix HT / bt</th><th>Disponibilité</th><th></th></tr></thead>
+            <tbody id="lines"></tbody>
+          </table>
+        </div>
+        <datalist id="cat"></datalist>
+        <div class="row" style="margin-top:8px"><button type="button" id="addLine">Ajouter une ligne</button></div>
+      </div>
+      <div class="row">
+        <button type="button" class="primary" id="saveBtn">Enregistrer la commande</button>
+        <button type="button" id="newBtn">Nouvelle commande</button>
+        <span class="status" id="saveStatus"></span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Sorties -->
+  <section class="col col-out">
+    <div class="panel">
+      <h2>Ce que l'agent prépare</h2>
+      <div class="cas" id="cas"></div>
+      <div id="casOverride">
+        <label>Changer le cas</label>
+        <div class="seg" id="caseSeg" role="group" aria-label="Cas">
+          <button type="button" data-v="auto" aria-pressed="true">Auto</button>
+          <button type="button" data-v="stock" aria-pressed="false">En stock</button>
+          <button type="button" data-v="direct" aria-pressed="false">En direct</button>
+          <button type="button" data-v="achat" aria-pressed="false">À acheter</button>
+        </div>
+      </div>
+      <div>
+        <label>À vérifier avant d'envoyer</label>
+        <ul class="checks" id="checks"></ul>
+      </div>
+      <div class="tabs" role="tablist" id="tabs"></div>
+      <div id="docs"></div>
+    </div>
+  </section>
+</main>
+
+<p class="foot">Prototype Trame, pour la demi-journée avec Romain. Clients et références habituelles : factures Pennylane du 14 janvier au 1er octobre 2026. Stock : fichier de l'entrepôt EDMT du 9 octobre 2026 et valorisation Cardarelli du 31 août. Les prix par client restent à reconstruire : saisissez-les. Règles du cas et du transport : premier jet, à valider avec Romain. Clients de restauration d'entreprise non repris.</p>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+// ---------- Données de référence ----------
+const PAL = 600, CART = 6;
+const CAT = [
+  ["BOIGA23RBC6C","Ch. Bois de Galet 2023, Côtes de Bordeaux",6000,null],
+  ["BOIGABIO23RBC6C","Ch. Bois de Galet 2023 bio",3800,null],
+  ["PLANLIEU20RBC6C","Ch. Plantey de Lieujan 2020, Haut-Médoc",1933,null],
+  ["REPAM21RBC6C","Repas entre amis 2021 rouge bio",1545,null],
+  ["CABREDON16BBC6C","Ch. Cabredon 2016, 50 cl",1140,null],
+  ["GRASA19RBC6C","Grands Sarrazins 2019",1090,null],
+  ["CROLI23RBC6C","Ch. Croix de Liret 2023",1000,null],
+  ["RETOUPE25BBC6C","Retour de Pêche 2025 blanc bio",881,4200],
+  ["LAFAU23RBC6C","Ch. Lafaurie 2023 Cuvée Anaé",803,6000],
+  ["PETOMED25SBC6C","Pétanque à l'ombre 2025 rosé Méditerranée",802,4764],
+  ["RETOUPE22BBC6C","Retour de Pêche 2022 blanc bio",739,null],
+  ["PETOCDP24SBC6C","Pétanque à l'ombre 2024 rosé Côtes de Provence",717,null],
+  ["JEANFO21BBC6C","Ch. Jean Fonthenille 2021",690,null],
+  ["PETOMED23SBC6C","Pétanque à l'ombre 2023 rosé Méditerranée",667,null],
+  ["MAILL19BBC6C","Ch. des Mailles 2019 Cuvée Laurence",660,null],
+  ["CLODO23RBCP6C","Clos Dominique 2023",618,null],
+  ["TRADMAR21RBC6C","Tradition du Marquis 2021, Saint-Estèphe",600,null],
+  ["GAUTHIER22RBC6C","Ch. Gauthier 2022",540,null],
+  ["BEAUBA21RBC6C","Ch. Beauséjour Bassac 2021, Puisseguin",469,null],
+  ["BARVI25RBC6C","Baron de Viaud 2025, Lalande-de-Pomerol",396,null],
+  ["EVIDEN25BBC6C","La Belle Pierre Évidence 2025",348,null],
+  ["LOUSTA21BBC6C","Ch. Loustalot 2021, Loupiac",306,null],
+  ["CAZET24BBC6C","Ch. Cazette 2024 blanc",252,null],
+  ["ARTISSYRAHC6","Artis Syrah rosé 0 %",228,null],
+  ["ARTISSAUVIGNONC6","Artis Sauvignon 0 %",210,null],
+  ["LOUSTA22BBC6C","Ch. Loustalot 2022, Loupiac",174,null],
+  ["FRANGINSBBC6C","Les Frangins blanc, IGP Périgord bio",168,null],
+  ["REFSO24BBC6C","Reflet de Soleil 2024 blanc",168,null],
+  ["DEVLI20RBC6C","La Devise de Lilian 2020, Saint-Estèphe",144,null],
+  ["VIGAT24RBC6C","Les Vigatanes 2024 rouge",141,null],
+  ["REFSO23SBC6C","Reflet de Soleil 2023 rosé",131,null],
+  ["FRANGINERBC6C","La Frangine tendre",120,null],
+  ["CHAMPPOLHENSLERBBC6C","Champagne Pol Hensler Grande Réserve",102,null],
+  ["GRACO24BBC6C","Grains de Cocotte 2024 colombard",90,null],
+  ["PETOMED24SBC6C","Pétanque à l'ombre 2024 rosé Méditerranée",59,null],
+  ["DAMHO22RBC6C","La Dame de l'Hospital 2022 bio",30,null],
+  ["NERTH21RBC6C","Ch. de la Nerthe 2021, Châteauneuf-du-Pape",30,null],
+  ["GORY21RBC6C","Ch. Gory 2021 bio",12,null],
+  ["FRANGINSRBC6C","Les Frangins rouge",12,null],
+  ["BBONCREMBBC6C","B de Bonhoste, crémant de Bordeaux blanc",9,null],
+  ["ROMEHA18BBC6C","Ch. Romer du Hayot 2018, Sauternes",0,null],
+  ["AUDLI23BBC6C","Audace de Liret 2023",0,null],
+].map(([code,nom,stock,card])=>({code,nom,stock,card,lieu:"EDMT"}));
+const VIG = [
+  ["V-LAMARZELLE","Ch. Lamarzelle Cormey, Saint-Émilion grand cru","à préciser"],
+  ["V-FLEURPOITOU","Ch. La Fleur Poitou, Lussac-Saint-Émilion","à préciser"],
+  ["V-CERTANMAY","Ch. Certan de May, Lussac-Saint-Émilion","EARL Château Certan de May"],
+  ["V-PETITCHABLIS","Petit Chablis 2023","à préciser"],
+  ["V-MOULINLUSSAC","Ch. Moulin de Lussac 2022, Lussac-Saint-Émilion","à préciser"],
+  ["V-HAUTSEGOTTES","Ch. Haut Segottes, Saint-Émilion grand cru","Château Haut Segottes"],
+  ["V-PERRIERE","Domaine de la Perrière 2023, bourgogne rouge","Domaine de la Perrière"],
+  ["V-SANDRES","Pouilly-Fumé Cuvée des Sandres 2024","à préciser"],
+  ["V-ISTRAC","Ch. Chevalier d'Istrac 2023, Moulis","Vignerons associés de Moulis"],
+  ["V-DENUZIERE","Jean Denuzière Côte-Rôtie 2023","Vins Denuzière"],
+  ["V-TRADROSE","Tradition rosé 2025, IGP Méditerranée","à préciser"],
+  ["V-ROSEBEAUSEJOUR","Ch. La Rose Beauséjour, Saint-Émilion grand cru","à préciser"],
+  ["V-PALMER","Champagne Palmer La Réserve","Palmer champagne"],
+].map(([code,nom,fournisseur])=>({code,nom,stock:null,card:null,lieu:"vigneron",fournisseur}));
+const PRODUCTS = [...CAT, ...VIG];
+const byCode = Object.fromEntries(PRODUCTS.map(p=>[p.code,p]));
+
+const GD="Grande distribution", GR="Grossistes et distributeurs", NE="Négoce, vrac et e-commerce", RE="Restaurants, cavistes, particuliers", TA="Tabacs, épiceries, proches";
+// [id, nom, groupe, ville, factures 2026, dernière facture, rythme médian (j), refs habituelles, n° de commande obligatoire, enseigne]
+const CLIENTS = [
+  ["mjb","Maison Johanès Boubée (Carrefour)",GD,"Bordeaux",24,"2026-10-01",12,["V-LAMARZELLE","V-FLEURPOITOU","V-CERTANMAY"],true,"carrefour"],
+  ["diapar","Diapar (Distribution alimentaire parisienne)",GD,"Clichy",3,"2026-07-09",54,["V-PETITCHABLIS","BARVI25RBC6C","V-MOULINLUSSAC"],false,""],
+  ["coopu","Coopérative U Enseigne",GD,"Mulhouse",16,"2026-09-29",102,["BEAUBA21RBC6C","BOIGA23RBC6C","PETOMED25SBC6C"],false,""],
+  ["auchan","Auchan Hypermarché",GD,"Lille",33,"2026-09-22",21,["LOUSTA21BBC6C","LOUSTA22BBC6C","ROMEHA18BBC6C"],true,"auchan"],
+  ["auchan-ouest","Auchan Hypermarché · PGC Ouest 1",GD,"Lille",7,"2026-06-09",28,["LOUSTA22BBC6C","LOUSTA21BBC6C","DAMHO22RBC6C"],true,"auchan"],
+  ["auchan-idf","Auchan Hypermarché · PGC IDF 1",GD,"Lille",5,"2026-09-22",77,["LOUSTA22BBC6C","LOUSTA21BBC6C","ROMEHA18BBC6C"],true,"auchan"],
+  ["scaso","SCASO (Centrale d'approvisionnement Sud-Ouest)",GD,"Beychac-et-Caillau",19,"2026-09-11",14,["V-ISTRAC"],false,""],
+  ["achatdiscount","Société Achat Discount",GR,"Artigues-près-Bordeaux",5,"2026-10-01",57,["LAFAU23RBC6C","CHAMPPOLHENSLERBBC6C"],false,""],
+  ["cvs","CVS France",GR,"Aire-sur-la-Lys",12,"2026-09-28",34,["TRADMAR21RBC6C","BEAUBA21RBC6C"],false,""],
+  ["logista","Logista Retail France",GR,"Vincennes",4,"2026-09-04",42,["PETOMED24SBC6C","NERTH21RBC6C","EVIDEN25BBC6C"],false,""],
+  ["maximo","Maximo",GR,"Taissy",3,"2026-09-16",119,["V-MOULINLUSSAC"],false,""],
+  ["lapique","Établissements Lapique",GR,"Dax",4,"2026-07-23",20,["PETOMED25SBC6C","PLANLIEU20RBC6C"],false,""],
+  ["mpr","MPR",GR,"Génicourt",8,"2026-07-13",11,["V-PERRIERE","V-SANDRES","PETOMED24SBC6C"],false,""],
+  ["meiar","Meiar Pfeiffer",GR,"Bordeaux",9,"2026-09-10",28,["FRANGINSRBC6C","FRANGINERBC6C","DEVLI20RBC6C"],false,""],
+  ["spdistri","SP Distribution",GR,"Saint-Berthevin",3,"2026-09-28",125,["PETOMED24SBC6C","PETOMED25SBC6C","REPAM21RBC6C"],false,""],
+  ["mazerolles","La Chartreuse de Mazerolles",NE,"Saint-Martin-Lacaussade",5,"2026-07-16",70,["V-HAUTSEGOTTES","GRACO24BBC6C"],false,""],
+  ["petitballon","Le Petit Ballon",NE,"Paris",1,"2026-04-23",null,["V-ROSEBEAUSEJOUR"],false,""],
+  ["noumea","Société Mercure Nouméa",NE,"Nouméa",2,"2026-08-26",148,["PETOMED24SBC6C","RETOUPE25BBC6C"],false,""],
+  ["esperance","Holding Espérance",TA,"Castillon-la-Bataille",7,"2026-09-23",34,["CROLI23RBC6C","LAFAU23RBC6C","PETOMED24SBC6C"],false,""],
+  ["epicerie","La Grande Épicerie de Paris",TA,"Paris",3,"2026-03-04",21,["V-ROSEBEAUSEJOUR"],false,""],
+  ["narval","Tabac Le Narval",TA,"Le Portel",5,"2026-09-03",38,["BBONCREMBBC6C","PETOMED24SBC6C","CHAMPPOLHENSLERBBC6C"],false,""],
+  ["proxi","Proxi Super Lège-Cap-Ferret",TA,"Lège-Cap-Ferret",5,"2026-05-19",35,["V-DENUZIERE"],false,""],
+  ["cauderan","Tabac Le Caudéran",TA,"Le Bouscat",5,"2026-09-11",50,["PETOMED24SBC6C","FRANGINERBC6C","PETOMED25SBC6C"],false,""],
+  ["essoyes","Essoyes Tabac Presse",TA,"Essoyes",2,"2026-06-02",84,["FRANGINERBC6C","GRACO24BBC6C"],false,""],
+  ["martho","Martho",RE,"Le Faou",7,"2026-08-13",19,["EVIDEN25BBC6C","AUDLI23BBC6C","RETOUPE25BBC6C"],false,""],
+  ["lesanz","Lesanz",RE,"Paris",3,"2026-09-05",86,["V-TRADROSE"],false,""],
+  ["hni","HNI",RE,"Paris",6,"2026-09-28",39,["GRACO24BBC6C"],false,""],
+  ["dyyp","SNC DYYP",RE,"Brest",5,"2026-09-28",43,["VIGAT24RBC6C","FRANGINSRBC6C"],false,""],
+  ["piquenique","Le Pique-Nique du Bassin",RE,"Arcachon",3,"2026-08-05",84,["PETOCDP24SBC6C","FRANGINERBC6C"],false,""],
+  ["saisonbio","Saison Bio",RE,"Libourne",3,"2026-09-11",64,["PETOMED25SBC6C","GRACO24BBC6C"],false,""],
+  ["bahutiers","Bahutiers 15",RE,"Bordeaux",4,"2026-09-03",14,["ARTISSAUVIGNONC6","ARTISSYRAHC6"],false,""],
+  ["loco","SNC Loco",RE,"Saint-Jean-de-Losne",4,"2026-08-25",62,["REFSO23SBC6C","PETOMED24SBC6C"],false,""],
+].map(([id,nom,groupe,ville,factures,derniere,rythme,refs,numReq,enseigne])=>({id,nom,groupe,ville,factures,derniere,rythme,refs,numReq,enseigne}));
+const byId = Object.fromEntries(CLIENTS.map(c=>[c.id,c]));
+const REF_DATE = new Date("2026-10-01T12:00:00");
+
+// ---------- État ----------
+const state = {
+  clientId: "auchan", canal: "mail", num: "", dliv: "", adr: "",
+  lines: [], caseOverride: "auto", tab: "bl", example: true, orders: [], editingId: null
+};
+let db = null, sample = null;
+
+// ---------- Utilitaires ----------
+const $ = s => document.querySelector(s);
+const esc = s => String(s ?? "").replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const fmtDate = iso => { if(!iso) return "à préciser"; const d = new Date(iso+"T12:00:00"); return isNaN(d) ? iso : d.toLocaleDateString("fr-FR",{day:"numeric",month:"long",year:"numeric"}); };
+const fmtNum = n => Number(n).toLocaleString("fr-FR");
+const fmtEur = n => Number(n).toLocaleString("fr-FR",{style:"currency",currency:"EUR"});
+const daysBetween = (a,b) => Math.round((b - a) / 86400000);
+const uid = () => Math.random().toString(36).slice(2,8);
+function toast(msg){ const t=$("#toast"); t.textContent=msg; t.classList.add("show"); clearTimeout(toast._t); toast._t=setTimeout(()=>t.classList.remove("show"),2200); }
+function bottles(l){ const q=Number(l.qty)||0; return l.unit==="cartons"? q*CART : l.unit==="palettes"? q*PAL : q; }
+function findProduct(txt){
+  if(!txt) return null;
+  if(byCode[txt]) return byCode[txt];
+  const t = txt.toLowerCase().trim();
+  return PRODUCTS.find(p => p.nom.toLowerCase() === t) || null;
+}
+
+// ---------- Cas et transport ----------
+function lineStatus(l){
+  const p = l.code ? byCode[l.code] : null;
+  const b = bottles(l);
+  if(!p) return { k:"inconnu", label:"Référence inconnue", cls:"crit" };
+  if(p.lieu === "vigneron") return { k:"direct", label:"Chez le vigneron", cls:"acc" };
+  if(p.stock >= b && b>0) return { k:"stock", label:`En stock · ${fmtNum(p.stock)} bt`, cls:"ok" };
+  if(b===0) return { k:"stock", label:`Stock ${fmtNum(p.stock)} bt`, cls:"" };
+  const manque = b - p.stock;
+  return { k:"achat", label:`Manque ${fmtNum(manque)} bt`+(p.card?` · ${fmtNum(p.card)} chez Cardarelli`:""), cls:"warn" };
+}
+function computeCase(){
+  const ls = state.lines.filter(l => l.code || l.txt);
+  if(!ls.length) return { k:"vide", label:"Aucune ligne", why:"Ajoutez au moins une ligne pour voir le cas." };
+  const ks = ls.map(l => lineStatus(l).k).filter(k => k!=="inconnu");
+  const auto = (() => {
+    if(!ks.length) return { k:"vide", label:"À compléter", why:"Les références ne sont pas reconnues." };
+    const has = k => ks.includes(k);
+    if(ks.every(k=>k==="stock")) return { k:"stock", label:"En stock", why:"Toutes les lignes sont disponibles à l'entrepôt EDMT." };
+    if(ks.every(k=>k==="direct")) return { k:"direct", label:"En direct", why:"Les vins partent de chez le vigneron, qui livre le client." };
+    if(has("direct") && (has("stock")||has("achat"))) return { k:"mixte", label:"Mixte", why:"La commande mélange l'entrepôt et des vins livrés en direct : proposez de la scinder." };
+    return { k:"achat", label:"À acheter", why:"Une ou plusieurs lignes manquent à l'entrepôt : commande au vigneron et enlèvement vers EDMT avant de livrer." };
+  })();
+  if(state.caseOverride !== "auto"){
+    const L = {stock:"En stock",direct:"En direct",achat:"À acheter"}[state.caseOverride];
+    return { k: state.caseOverride, label: L, why: `Choisi à la main (proposition automatique : ${auto.label.toLowerCase()}).` };
+  }
+  return auto;
+}
+function computeTransport(cas, client){
+  const total = state.lines.reduce((s,l)=>s+bottles(l),0);
+  if(cas.k==="direct") return { k:"vigneron", label:"Le vigneron livre (ou Lahaye)", detail:"Transport organisé avec chaque vigneron." };
+  let base;
+  if(client && client.groupe===GD){
+    base = client.enseigne==="auchan" ? { k:"enlevement", label:"Enlèvement par Auchan", detail:"À valider sur Magenta." }
+         : client.enseigne==="carrefour" ? { k:"enlevement", label:"Enlèvement par Carrefour", detail:"À la date du bon de commande." }
+         : { k:"enlevement", label:"Enlèvement par l'enseigne", detail:"Date à confirmer avec l'acheteur." };
+  } else if(total >= PAL){
+    base = { k:"lahaye", label:"Lahaye · palette", detail:`${fmtNum(total)} bouteilles, soit ${(total/PAL).toLocaleString("fr-FR",{maximumFractionDigits:1})} palette(s).` };
+  } else {
+    base = { k:"dsv", label:"DSV · colis", detail:`${fmtNum(total)} bouteilles, soit ${Math.ceil(total/CART)} carton(s).` };
+  }
+  if(cas.k==="achat") base.detail = `D'abord l'enlèvement chez le vigneron vers EDMT (Lahaye). Ensuite : ${base.label}. ${base.detail}`;
+  return base;
+}
+
+// ---------- Rendu : clients ----------
+function renderClients(){
+  const q = $("#q").value.toLowerCase().trim();
+  const list = CLIENTS.filter(c => !q || (c.nom+" "+c.ville+" "+c.groupe).toLowerCase().includes(q));
+  $("#clist").innerHTML = list.length ? list.map(c => `
+    <button type="button" class="citem${c.id===state.clientId?" on":""}" role="option" aria-selected="${c.id===state.clientId}" data-id="${c.id}">
+      <span><b>${esc(c.nom)}</b><br><small>${esc(c.groupe)}</small></span><small>${esc(c.ville)}</small>
+    </button>`).join("") : `<p class="empty" style="padding:8px">Aucun client ne correspond. Un nouveau client s'ajoute au fichier clients après confirmation de Romain.</p>`;
+}
+function renderFiche(){
+  const c = byId[state.clientId];
+  if(!c){ $("#fiche").innerHTML = `<h2>Fiche</h2><p class="empty">Choisissez un client.</p>`; return; }
+  const since = daysBetween(new Date(c.derniere+"T12:00:00"), REF_DATE);
+  const late = c.rythme && since > 1.5*c.rythme;
+  $("#fiche").innerHTML = `
+    <h2>Fiche</h2>
+    <div class="cname">${esc(c.nom)}</div>
+    <div class="row"><span class="chip">${esc(c.groupe)}</span>${c.numReq?`<span class="chip acc">N° de commande obligatoire</span>`:""}${late?`<span class="chip warn">En retard sur son rythme</span>`:""}</div>
+    <dl>
+      <dt>Ville</dt><dd>${esc(c.ville)}</dd>
+      <dt>Factures 2026</dt><dd>${c.factures}</dd>
+      <dt>Dernière facture</dt><dd>${fmtDate(c.derniere)}</dd>
+      <dt>Rythme habituel</dt><dd>${c.rythme?`toutes les ${c.rythme} j environ`:"une seule commande"}</dd>
+    </dl>
+    <div><label>Références habituelles · cliquer pour ajouter</label>
+      <div class="refs">${c.refs.map(code=>`<button type="button" class="chip" data-add="${code}">${esc(byCode[code]?.nom||code)}</button>`).join("")}</div>
+    </div>`;
+}
+function renderHist(){
+  const c = byId[state.clientId];
+  const mine = state.orders.filter(o => o.clientId === state.clientId).sort((a,b)=>b.createdAt-a.createdAt).slice(0,6);
+  const rows = mine.map(o => `<div class="h"><span>${fmtDate(o.date)} · ${o.lignes.length} ligne(s) · ${esc(o.casLabel||"")}</span><span class="chip">${esc(o.statut||"brouillon")}</span></div>`).join("");
+  const pl = c ? `<div class="h"><span>Pennylane 2026 : ${c.factures} facture(s), dernière le ${fmtDate(c.derniere)}</span></div>` : "";
+  $("#hist").innerHTML = (db ? (rows || `<p class="empty">Aucune commande enregistrée ici pour ce client. Elles apparaîtront à l'enregistrement.</p>`) : `<p class="empty">L'historique des commandes enregistrées n'est pas disponible dans cette vue.</p>`) + pl;
+}
+
+// ---------- Rendu : commande ----------
+function renderLines(){
+  $("#lines").innerHTML = state.lines.map((l,i) => {
+    const st = lineStatus(l);
+    const p = l.code ? byCode[l.code] : null;
+    return `<tr data-i="${i}">
+      <td><input list="cat" id="ref-${l.id}" data-f="ref" value="${esc(p?p.nom:(l.txt||""))}" placeholder="Référence ou libellé du client" aria-label="Référence"></td>
+      <td><input class="qty" id="qty-${l.id}" type="number" min="0" step="1" data-f="qty" value="${esc(l.qty)}" aria-label="Quantité"></td>
+      <td><select id="unit-${l.id}" data-f="unit" aria-label="Unité">
+        ${["bouteilles","cartons","palettes"].map(u=>`<option${u===l.unit?" selected":""}>${u}</option>`).join("")}</select></td>
+      <td><input class="price" id="price-${l.id}" type="number" min="0" step="0.01" data-f="price" value="${esc(l.price)}" placeholder="à saisir" aria-label="Prix HT par bouteille"></td>
+      <td><span class="chip ${st.cls}">${esc(st.label)}</span></td>
+      <td><button type="button" class="ghost" data-del="${i}" aria-label="Supprimer la ligne">Retirer</button></td>
+    </tr>`;
+  }).join("") || `<tr><td colspan="6" class="empty">Aucune ligne. Collez un mail, cliquez une référence habituelle ou ajoutez une ligne.</td></tr>`;
+}
+function syncForm(){
+  $("#num").value = state.num; $("#dliv").value = state.dliv; $("#adr").value = state.adr;
+  document.querySelectorAll("#canal button").forEach(b => b.setAttribute("aria-pressed", b.dataset.v===state.canal));
+  document.querySelectorAll("#caseSeg button").forEach(b => b.setAttribute("aria-pressed", b.dataset.v===state.caseOverride));
+  $("#exflag").hidden = !state.example;
+}
+
+// ---------- Rendu : sorties ----------
+function docLines(ls, withPrice){
+  return `<table><thead><tr><th>Réf.</th><th>Désignation</th><th style="text-align:right">Bt</th>${withPrice?`<th style="text-align:right">PU HT</th><th style="text-align:right">Total HT</th>`:""}</tr></thead><tbody>${
+    ls.map(l=>{ const p=byCode[l.code]; const b=bottles(l); const pu=Number(l.price)||0;
+      return `<tr><td>${esc(p?p.code:"?")}</td><td>${esc(p?p.nom:l.txt)}</td><td class="num">${fmtNum(b)}</td>${withPrice?`<td class="num">${pu?fmtEur(pu):"à saisir"}</td><td class="num">${pu?fmtEur(pu*b):"—"}</td>`:""}</tr>`;}).join("")
+  }</tbody></table>`;
+}
+function linesText(ls){ return ls.map(l=>{ const p=byCode[l.code]; return `- ${p?p.nom:l.txt} : ${fmtNum(bottles(l))} bouteilles`; }).join("\n"); }
+function buildDocs(cas, tr, c){
+  const ls = state.lines.filter(l => l.code || l.txt);
+  const cn = c ? c.nom : "[client]";
+  const date = fmtDate(state.dliv);
+  const ref = state.num ? ` · commande ${state.num}` : "";
+  const docs = [];
+  const total = ls.reduce((s,l)=>s+bottles(l),0);
+  // BL
+  if(cas.k !== "direct"){
+    docs.push({ id:"bl", tab:"BL", title:"Bon de livraison · brouillon Pennylane", html:`
+      <div><b>${esc(cn)}</b><br>${esc(state.adr||c?.ville||"")}<br>N° de commande client : ${esc(state.num||"à reporter")}<br>Livraison ou enlèvement : ${esc(date)}</div>
+      ${docLines(ls,false)}<div>Total : <b>${fmtNum(total)} bouteilles</b> · ${esc(tr.label)}</div>`,
+      text:`BL brouillon — ${cn}${ref}\nLivraison : ${date}, ${state.adr||c?.ville||""}\n${linesText(ls)}\nTotal : ${total} bouteilles` });
+  }
+  // Mails
+  const mails = [];
+  const vignLines = ls.filter(l => byCode[l.code]?.lieu==="vigneron");
+  const manque = ls.filter(l => lineStatus(l).k==="achat");
+  if(cas.k==="stock" || cas.k==="achat" || cas.k==="mixte"){
+    if(cas.k!=="stock" && manque.length){
+      mails.push({ to:"Vigneron ou embouteilleur", subj:`Commande ${cn}${ref}`, body:`Bonjour,\n\nPour une commande ${cn}, je vous confirme la commande suivante :\n${manque.map(l=>{const p=byCode[l.code]; const m=bottles(l)-(p?.stock||0); return `- ${p?.nom||l.txt} : ${fmtNum(m)} bouteilles`;}).join("\n")}\n\nEnlèvement à prévoir vers l'entrepôt EDMT (Saint-Médard-d'Eyrans), avant le ${date}. Pouvez-vous me confirmer la date de mise à disposition ?\n\nMerci,\nRomain` });
+    }
+    mails.push({ to:"Entrepôt EDMT", subj:`Nouvelle commande à préparer · ${cn}${ref}`, body:`Bonjour,\n\nPouvez-vous préparer la commande ci-jointe (BL en pièce jointe) pour ${tr.k==="enlevement"?"un enlèvement":"une livraison"} le ${date} ?\n${linesText(ls.filter(l=>byCode[l.code]?.lieu!=="vigneron"))}\n\nTransport : ${tr.label}.${cas.k==="achat"?"\nUne partie arrive du vigneron : je vous confirme la réception dès que possible.":""}\nMerci de me confirmer la sortie.\n\nRomain` });
+    if(tr.k==="dsv" || tr.k==="lahaye"){
+      mails.push({ to: tr.k==="dsv"?"DSV":"Lahaye", subj:`Enlèvement EDMT · ${cn} · ${date}`, body:`Bonjour,\n\nMerci de prévoir un enlèvement chez EDMT (Saint-Médard-d'Eyrans) le ${date} : ${tr.k==="dsv"?`${Math.ceil(total/CART)} colis`:`${Math.ceil(total/PAL)} palette(s)`}, ${fmtNum(total)} bouteilles.\nLivraison : ${cn}, ${state.adr||c?.ville||""}.\nBL joint.\n\nRomain` });
+    }
+  }
+  if(cas.k==="direct" || cas.k==="mixte"){
+    const groups = {};
+    vignLines.forEach(l => { const f = byCode[l.code].fournisseur; (groups[f] ||= []).push(l); });
+    Object.entries(groups).forEach(([f, gl]) => {
+      mails.push({ to:`Vigneron · ${f}`, subj:`Commande ${cn}${ref}`, body:`Bonjour,\n\nJe vous confirme la commande suivante, à livrer directement chez le client :\n${linesText(gl)}\n\nLivraison : ${cn}, ${state.adr||c?.ville||""}, le ${date}.${state.num?`\nMerci de reporter la référence de commande ${state.num}.`:""}\nTransport : par vos soins ou Lahaye, merci de me confirmer.\n\nRomain` });
+    });
+  }
+  docs.push({ id:"mails", tab:`Mails (${mails.length})`, title:"Mails · brouillons Outlook", mails });
+  // Facture
+  const ht = ls.reduce((s,l)=>s+(Number(l.price)||0)*bottles(l),0);
+  const missing = ls.some(l=>!Number(l.price));
+  const quand = cas.k==="direct" ? "à l'expédition (à confirmer : ou une fois livré ?)" : "dès la sortie de l'entrepôt, à partir du BL";
+  docs.push({ id:"fac", tab:"Facture", title:"Facture · brouillon Pennylane", html:`
+    <div><b>${esc(cn)}</b> · conditions franco · à préparer ${esc(quand)}<br>N° de commande client : ${esc(state.num||"—")}</div>
+    ${docLines(ls,true)}
+    <div>Total HT : <b>${missing?"à compléter (prix manquants)":fmtEur(ht)}</b></div>`,
+    text:`Facture brouillon — ${cn}${ref}\nConditions franco. À préparer ${quand}.\n${ls.map(l=>{const p=byCode[l.code]; const b=bottles(l); const pu=Number(l.price)||0; return `- ${p?p.nom:l.txt} : ${b} bt × ${pu?pu.toFixed(2)+" €":"prix à saisir"}`;}).join("\n")}\nTotal HT : ${missing?"à compléter":ht.toFixed(2)+" €"}` });
+  // Auchan
+  if(c && c.enseigne==="auchan" && cas.k!=="direct"){
+    docs.push({ id:"auchan", tab:"Auchan", title:"Liste de contrôle Auchan", html:`
+      <ul class="checks">
+        <li>BL créé dans Pennylane</li>
+        <li>N° de BL reporté sur EDI ONE, données logistiques saisies</li>
+        <li>BL envoyé à l'entrepôt EDMT</li>
+        <li>Enlèvement validé sur Magenta</li>
+      </ul><div class="why">Les portails restent manuels : l'agent prépare la liste, Romain coche.</div>`,
+      text:"Auchan : BL Pennylane · n° de BL sur EDI ONE · BL à EDMT · enlèvement validé sur Magenta" });
+  }
+  return docs;
+}
+function renderOut(){
+  const c = byId[state.clientId];
+  const cas = computeCase();
+  const tr = computeTransport(cas, c);
+  const casEl = $("#cas");
+  casEl.className = "cas c-" + cas.k;
+  casEl.innerHTML = `<span class="kicker" style="color:var(--muted)">Cas</span><span class="big">${esc(cas.label)}</span><span class="why">${esc(cas.why)}</span>
+    <div style="margin-top:4px"><b>Transport proposé :</b> ${esc(tr.label)}<br><span class="why">${esc(tr.detail)}</span></div>`;
+  // vérifications
+  const ls = state.lines.filter(l => l.code || l.txt);
+  const checks = [];
+  if(!c) checks.push(["Choisir le client",0]);
+  if(c && c.numReq && !state.num) checks.push(["Reporter le n° de commande client : obligatoire pour cette enseigne",0]);
+  if(!state.dliv) checks.push(["Préciser la date de livraison ou d'enlèvement",0]);
+  ls.forEach(l => { if(lineStatus(l).k==="inconnu") checks.push([`Référence non reconnue : « ${l.txt} »`,0]); });
+  ls.forEach(l => { const s=lineStatus(l); if(s.k==="achat") checks.push([`${byCode[l.code].nom} : ${s.label.toLowerCase()}`,0]); });
+  if(ls.some(l=>!Number(l.price))) checks.push(["Saisir les prix manquants : le catalogue de prix par client est en cours de reconstruction",0]);
+  if(cas.k==="mixte") checks.push(["Scinder la commande : une partie part de l'entrepôt, une partie du vigneron",0]);
+  if(!checks.length) checks.push(["Tout est complet : relire et envoyer",1]);
+  $("#checks").innerHTML = checks.map(([t,ok])=>`<li class="${ok?"okk":""}">${esc(t)}</li>`).join("");
+  // documents
+  const docs = buildDocs(cas, tr, c);
+  if(!docs.find(d=>d.id===state.tab)) state.tab = docs[0].id;
+  $("#tabs").innerHTML = docs.map(d=>`<button type="button" role="tab" id="tab-${d.id}" aria-selected="${d.id===state.tab}" data-tab="${d.id}">${esc(d.tab)}</button>`).join("");
+  const d = docs.find(x=>x.id===state.tab);
+  if(d.mails){
+    $("#docs").innerHTML = d.mails.length ? d.mails.map((m,i)=>`
+      <div class="doc" style="margin-top:10px">
+        <div class="dh"><span class="dt">À : ${esc(m.to)}</span><button type="button" data-copy="m${i}">Copier</button></div>
+        <div><b>Objet :</b> ${esc(m.subj)}</div>
+        <pre id="m${i}">${esc(m.body)}</pre>
+      </div>`).join("") : `<p class="empty" style="margin-top:10px">Pas de mail à préparer pour l'instant.</p>`;
+    $("#docs")._mails = d.mails;
+  } else {
+    $("#docs").innerHTML = `<div class="doc" style="margin-top:10px"><div class="dh"><span class="dt">${esc(d.title)}</span><button type="button" data-copy="doc">Copier</button></div>${d.html}</div>`;
+    $("#docs")._text = d.text;
+  }
+}
+function renderAll(){ renderClients(); renderFiche(); renderHist(); renderLines(); syncForm(); renderOut(); }
+
+// ---------- Actions ----------
+function selectClient(id){
+  state.clientId = id; const c = byId[id];
+  if(!state.adr || state.example) state.adr = c ? c.ville : "";
+  renderAll();
+}
+function addLine(code, qty, unit){ state.lines.push({ id:uid(), code: code||null, txt:"", qty: qty ?? "", unit: unit||"bouteilles", price:"" }); state.example=false; }
+function resetOrder(){
+  Object.assign(state, { num:"", dliv:"", adr: byId[state.clientId]?.ville || "", lines:[], caseOverride:"auto", example:false, editingId:null });
+  $("#mail").value = ""; $("#readStatus").textContent = ""; $("#saveStatus").textContent = "";
+  renderAll();
+}
+async function copyText(text, el){
+  try{ await navigator.clipboard.writeText(text); toast("Copié"); }
+  catch(e){ if(el){ const r=document.createRange(); r.selectNodeContents(el); const s=getSelection(); s.removeAllRanges(); s.addRange(r); } toast("Texte sélectionné : copiez-le avec Ctrl+C"); }
+}
+
+$("#q").addEventListener("input", renderClients);
+$("#clist").addEventListener("click", e => { const b=e.target.closest("[data-id]"); if(b) selectClient(b.dataset.id); });
+$("#fiche").addEventListener("click", e => { const b=e.target.closest("[data-add]"); if(!b) return; addLine(b.dataset.add, "", "cartons"); renderLines(); renderOut(); syncForm(); const last=state.lines[state.lines.length-1]; const el=document.getElementById("qty-"+last.id); el && el.focus(); });
+$("#canal").addEventListener("click", e => { const b=e.target.closest("button"); if(!b) return; state.canal=b.dataset.v; $("#mailbox").hidden = state.canal==="tel"; syncForm(); });
+$("#caseSeg").addEventListener("click", e => { const b=e.target.closest("button"); if(!b) return; state.caseOverride=b.dataset.v; syncForm(); renderOut(); });
+["num","dliv","adr"].forEach(f => $("#"+f).addEventListener("input", e => { state[f]=e.target.value; state.example=false; syncForm(); renderOut(); }));
+$("#addLine").addEventListener("click", () => { addLine(); renderLines(); syncForm(); renderOut(); });
+$("#lines").addEventListener("click", e => { const b=e.target.closest("[data-del]"); if(!b) return; state.lines.splice(+b.dataset.del,1); renderLines(); renderOut(); });
+$("#lines").addEventListener("change", e => {
+  const tr=e.target.closest("tr[data-i]"); if(!tr) return; const l=state.lines[+tr.dataset.i]; const f=e.target.dataset.f;
+  if(f==="ref"){ const p=findProduct(e.target.value); l.code=p?p.code:null; l.txt=p?"":e.target.value; }
+  else l[f]=e.target.value;
+  state.example=false; renderLines(); syncForm(); renderOut();
+});
+$("#tabs").addEventListener("click", e => { const b=e.target.closest("[data-tab]"); if(!b) return; state.tab=b.dataset.tab; renderOut(); });
+$("#docs").addEventListener("click", e => {
+  const b=e.target.closest("[data-copy]"); if(!b) return;
+  if(b.dataset.copy==="doc") copyText($("#docs")._text, b.closest(".doc"));
+  else { const i=+b.dataset.copy.slice(1); const m=$("#docs")._mails[i]; copyText(`Objet : ${m.subj}\n\n${m.body}`, document.getElementById(b.dataset.copy)); }
+});
+$("#newBtn").addEventListener("click", resetOrder);
+$("#exMail").addEventListener("click", () => {
+  $("#mail").value = "Bonjour Romain,\n\nPouvez-vous nous livrer pour jeudi prochain 4 cartons de Pétanque à l'ombre rosé 2025 et 2 cartons de Grains de Cocotte colombard ? Et si vous avez encore du Retour de Pêche blanc, 2 cartons aussi.\n\nMerci, bonne journée\nJulie — Saison Bio, Libourne\n\n(exemple de mail, non réel)";
+  if(sample) $("#readStatus").textContent = "Cliquez « Lire avec Claude ».";
+});
+
+// Lecture d'un mail par Claude
+$("#readBtn").addEventListener("click", async () => {
+  const txt = $("#mail").value.trim();
+  if(!txt){ $("#readStatus").textContent = "Collez d'abord un mail."; return; }
+  const btn = $("#readBtn"); btn.disabled = true; $("#readStatus").textContent = "Lecture en cours…";
+  const today = new Date().toISOString().slice(0,10);
+  const prompt = `Tu es l'assistant commandes de Direct du Château, négociant en vins. Lis la commande ci-dessous et réponds uniquement en JSON, sans texte autour.
+Format : {"client_id": string|null, "client_nom_source": string, "numero_commande": string|null, "date_livraison": "YYYY-MM-DD"|null, "adresse": string|null, "lignes": [{"code": string|null, "libelle_source": string, "quantite": number, "unite": "bouteilles"|"cartons"|"palettes"}], "a_verifier": [string]}
+Règles : n'invente rien. client_id doit venir de la liste des clients, sinon null. code doit venir du catalogue ; si deux codes sont possibles (millésime, format), mets null et explique-le dans a_verifier. Un carton = 6 bouteilles, garde l'unité d'origine. Date du jour : ${today} (pour « jeudi prochain » et autres dates relatives).
+Clients (id | nom | ville) :
+${CLIENTS.map(c=>`${c.id} | ${c.nom} | ${c.ville}`).join("\n")}
+Catalogue (code | désignation) :
+${PRODUCTS.map(p=>`${p.code} | ${p.nom}`).join("\n")}
+Commande :
+"""${txt}"""`;
+  try{
+    const r = await sample.json(prompt, { modelTier:"default" });
+    if(r.client_id && byId[r.client_id]) state.clientId = r.client_id;
+    const c = byId[state.clientId];
+    state.num = r.numero_commande || ""; state.dliv = r.date_livraison || ""; state.adr = r.adresse || (c?c.ville:"");
+    state.lines = (r.lignes||[]).map(l => ({ id:uid(), code: (l.code && byCode[l.code]) ? l.code : null, txt: (l.code && byCode[l.code]) ? "" : (l.libelle_source||""), qty: l.quantite ?? "", unit: ["bouteilles","cartons","palettes"].includes(l.unite)?l.unite:"bouteilles", price:"" }));
+    state.caseOverride = "auto"; state.example = false;
+    const n = (r.a_verifier||[]).length;
+    $("#readStatus").textContent = `Lu : ${state.lines.length} ligne(s)${n?`, ${n} point(s) à vérifier : ${r.a_verifier.join(" · ")}`:""}.`;
+    renderAll();
+  }catch(e){
+    $("#readStatus").textContent = e && e.code==="not_granted" ? "Lecture refusée : saisissez les lignes à la main." : e && e.code==="rate_limited" ? "Trop de lectures d'affilée : réessayez dans un moment." : "La lecture n'a pas abouti : saisissez les lignes à la main.";
+    if(e && e.code==="not_granted") $("#readBtn").hidden = true;
+  }finally{ btn.disabled = false; }
+});
+
+// Enregistrement
+$("#saveBtn").addEventListener("click", async () => {
+  const c = byId[state.clientId];
+  const ls = state.lines.filter(l => l.code || l.txt);
+  if(!c || !ls.length){ $("#saveStatus").textContent = "Il faut un client et au moins une ligne."; return; }
+  if(!db){ $("#saveStatus").textContent = "L'enregistrement n'est pas disponible dans cette vue."; return; }
+  const cas = computeCase(), tr = computeTransport(cas, c);
+  const doc = { clientId:c.id, clientNom:c.nom, canal:state.canal, numCommande:state.num, date:new Date().toISOString().slice(0,10), dateLivraison:state.dliv, adresse:state.adr,
+    lignes: ls.map(l=>({ code:l.code, designation: l.code?byCode[l.code].nom:l.txt, quantite:Number(l.qty)||0, unite:l.unit, bouteilles:bottles(l), prixHT:Number(l.price)||null })),
+    cas:cas.k, casLabel:cas.label, transport:tr.label, statut:"brouillon", createdAt:Date.now() };
+  $("#saveBtn").disabled = true; $("#saveStatus").textContent = "Enregistrement…";
+  try{
+    if(state.editingId) await db.collection("commandes").doc(state.editingId).set(doc);
+    else { const ref = await db.collection("commandes").add(doc); state.editingId = ref.id; }
+    $("#saveStatus").textContent = "Commande enregistrée en brouillon."; toast("Commande enregistrée");
+  }catch(e){ $("#saveStatus").textContent = e && e.code==="permission_denied" ? "Vous pouvez consulter cette page, pas y enregistrer de commande." : "L'enregistrement a échoué : réessayez."; }
+  finally{ $("#saveBtn").disabled = false; }
+});
+
+// ---------- Démarrage ----------
+state.adr = byId[state.clientId].ville;
+state.num = "EX-4501-2026"; state.dliv = "2026-10-29";
+state.lines = [
+  { id:uid(), code:"LOUSTA21BBC6C", txt:"", qty:20, unit:"cartons", price:"" },
+  { id:uid(), code:"ROMEHA18BBC6C", txt:"", qty:60, unit:"bouteilles", price:"" },
+];
+renderAll();
+
+(async () => {
+  try{
+    sample = window.claude?.use ? await window.claude.use("sample") : null;
+    if(sample){ $("#readBtn").hidden = false; }
+    else $("#readStatus").textContent = "La lecture automatique n'est pas disponible ici : saisissez les lignes.";
+  }catch(e){}
+  try{
+    db = window.claude?.use ? await window.claude.use("db") : null;
+    if(db){
+      db.collection("commandes").onSnapshot(snap => {
+        state.orders = snap.docs.map(d => ({ id:d.id, ...d.data() }));
+        renderHist();
+      }, () => { $("#hist").innerHTML = `<p class="empty">L'historique n'a pas pu être chargé.</p>`; });
+    }
+    renderHist();
+  }catch(e){}
+})();
+</script>
+
+</body></html>

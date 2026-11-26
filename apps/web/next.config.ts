@@ -9,6 +9,13 @@ const nextConfig: NextConfig = {
       },
     ],
   },
+  async rewrites() {
+    return [
+      { source: "/romain/deck", destination: "/romain/deck.html" },
+      { source: "/romain/commande", destination: "/romain/commande.html" },
+      { source: "/romain", destination: "/romain/index.html" },
+    ];
+  },
 };
 
 export default nextConfig;
