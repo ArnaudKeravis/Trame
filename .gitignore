@@ -39,3 +39,7 @@ Thumbs.db
 
 # Git worktrees
 .worktrees/
+
+# Local agent issue tracker (mattpocock/skills)
+.scratch/*
+!.scratch/.gitkeep
